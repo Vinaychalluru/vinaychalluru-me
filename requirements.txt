@@ -16,6 +16,8 @@ django-heroku==0.3.1
     # via -r requirements.in
 fontawesomefree==6.1.1
     # via -r requirements.in
+gunicorn==20.1.0
+    # via -r requirements.in
 psycopg2==2.9.3
     # via django-heroku
 sqlparse==0.4.2
@@ -24,3 +26,6 @@ tzdata==2022.1
     # via django
 whitenoise==6.0.0
     # via django-heroku
+
+# The following packages are considered to be unsafe in a requirements file:
+# setuptools
