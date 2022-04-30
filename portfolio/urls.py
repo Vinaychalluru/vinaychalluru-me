@@ -20,5 +20,5 @@ import about.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('about_me/', about.views.AboutMe.as_view(), name='about_me')
+    path('', about.views.AboutMe.as_view(), name='about_me')
 ]
