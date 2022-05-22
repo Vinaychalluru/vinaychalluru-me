@@ -20,15 +20,10 @@ FUNCTION_APP_PATH = "api/vinaychalluru-me"
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = os.environ['SECRET_KEY']
-SECRET_KEY = "'django-insecure-4%l*a@1#3q24dtwicknsnd5omanb3&+qp%@yv_p7nzvw!5srw1'"
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
-
 
 # Application definition
 
