@@ -18,7 +18,9 @@
     <!-- CSS -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500&display=swap">
     <link rel="stylesheet" href="{% static 'about/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'fontawesomefree/css/all.min.css' %}" type="text/css">
+    {#    <link rel="stylesheet" href="{% static 'fontawesomefree/css/all.min.css' %}" type="text/css">#}
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css">
     <link rel="stylesheet" href="{% static 'about/css/jquery.mCustomScrollbar.min.css' %}">
     <link rel="stylesheet" href="{% static 'about/css/animate.css' %}">
     <link rel="stylesheet" href="{% static 'about/css/style.css' %}">
@@ -77,11 +79,6 @@
             </a>
         </div>
 
-        <div class="dark-light-buttons">
-            <a class="btn btn-primary btn-customized-4 btn-customized-dark" href="#" role="button">Dark</a>
-            <a class="btn btn-primary btn-customized-4 btn-customized-light" href="#" role="button">Light</a>
-        </div>
-
     </nav>
     <!-- End sidebar -->
 
@@ -108,36 +105,44 @@
                 <div class="row">
                     <div class="col col-md-10 offset-md-1 col-lg-8 offset-lg-2">
                         <div class="description wow fadeInLeft">
-                            <ul>
-                                <li class="ql-align-left">Experienced <strong>Python lead developer </strong>skilled
+                            <ul class="fa-ul">
+                                <li><span class="fa-li"><i class="fa-solid fa-check-square"></i></span>Experienced
+                                    <strong>Python lead developer </strong>skilled
                                     in
                                     <strong>Django, Django Rest Framework, Microsoft Azure, SQL, Team management and
                                         Project delivery</strong></li>
-                                <li class="ql-align-left">Skilled user in <strong>Pycharm Professional, Visual
-                                    Studio
-                                    Code, Git and Agile</strong></li>
-                                <li class="ql-align-left"><strong>10 years of industry
+                                <li><span class="fa-li"><i class="fa-solid fa-check-square"></i></span>Skilled user in
+                                    <strong>Pycharm Professional, Visual
+                                        Studio
+                                        Code, Git and Agile</strong></li>
+                                <li><span class="fa-li"><i class="fa-solid fa-check-square"></i></span><strong>10 years
+                                    of industry
                                     experience </strong>with<strong>
                                     5+ years in team leadership</strong>, team management, project ownership and project
                                     delivery
                                 </li>
-                                <li class="ql-align-left"><strong>Managed Agile teams, handled the project
+                                <li><span class="fa-li"><i class="fa-solid fa-check-square"></i></span><strong>Managed
+                                    Agile teams, handled the project
                                     deliverables </strong>and <strong>mentored trainees</strong></li>
-                                <li class="ql-align-left">Contributed to <strong>Project Planning,</strong> <strong>Product
-                                    design </strong>and <strong>Customer Delivery</strong></li>
-                                <li class="ql-align-left"><strong>Built client-oriented solutions</strong> by
+                                <li><span class="fa-li"><i class="fa-solid fa-check-square"></i></span>Contributed to
+                                    <strong>Project Planning,</strong> <strong>Product
+                                        design </strong>and <strong>Customer Delivery</strong></li>
+                                <li><span class="fa-li"><i class="fa-solid fa-check-square"></i></span><strong>Built
+                                    client-oriented solutions</strong> by
                                     thoroughly
                                     examining background of the problems
                                 </li>
-                                <li class="ql-align-left">I closely follow the latest trends in IT Business
+                                <li><span class="fa-li"><i class="fa-solid fa-check-square"></i></span>I closely follow
+                                    the latest trends in IT Business
                                     processes,
                                     Technological advancements, and Innovative solutions in <strong>Retail </strong>(Purchasing,
                                     Logistics and Warehouse management systems), <strong>Insurance</strong>,
                                     <strong>Banking </strong>and
                                     <strong>Hospitality </strong>industries
                                 </li>
-                                <li class="ql-align-left">Believes in - <strong>Anybody can learn a new
-                                    skill </strong>with
+                                <li><span class="fa-li"><i class="fa-solid fa-check-square"></i></span>Believes in -
+                                    <strong>Anybody can learn a new
+                                        skill </strong>with
                                     passion and spirit
                                 </li>
                             </ul>
@@ -149,9 +154,9 @@
                             <a class="btn btn-primary btn-customized scroll-link" href="#section-3" role="button">
                                 <i class="fas fa-laptop-code"></i>Work Experience
                             </a>
-                            <a class="btn btn-primary btn-customized scroll-link" href="{% url 'download_resume' %}"
+                            <a class="btn btn-primary btn-customized" href="{% url 'download_resume' %}"
                                role="button">
-                                <i class="fa-solid fa-file-arrow-down"></i>Resume
+                                <i class="fa-solid fa-download"></i>Resume
                             </a>
                         </div>
                     </div>
@@ -214,42 +219,43 @@
                 <div class="row">
 
                     <div class="col-3 section-2-box wow fadeInUp">
-                        <ul class="skill-list">
-                            <li>Python</li>
-                            <li>Django</li>
-                            <li>RESTful Web Services</li>
-                            <li>Microsoft Azure</li>
-                            <li>PyCharm Professional</li>
-                            <li>SQL</li>
+                        <ul class="fa-ul">
+                            <li><span class="fa-li"><i class="fa-solid fa-hashtag"></i></span>Python</li>
+                            <li><span class="fa-li"><i class="fa-solid fa-hashtag"></i></span>Django</li>
+                            <li><span class="fa-li"><i class="fa-solid fa-hashtag"></i></span>RESTful Web Services</li>
+                            <li><span class="fa-li"><i class="fa-solid fa-hashtag"></i></span>Microsoft Azure</li>
+                            <li><span class="fa-li"><i class="fa-solid fa-hashtag"></i></span>PyCharm Professional</li>
+                            <li><span class="fa-li"><i class="fa-solid fa-hashtag"></i></span>SQL</li>
                         </ul>
                     </div>
                     <div class="col-3 section-2-box wow fadeInUp">
-                        <ul class="skill-list">
-                            <li>Linux Shell Scripting</li>
-                            <li>Backend Development</li>
-                            <li>Microservices</li>
-                            <li>API</li>
-                            <li>Git</li>
-                            <li>OOPS</li>
+                        <ul class="fa-ul">
+                            <li><span class="fa-li"><i class="fa-solid fa-hashtag"></i></span>Linux Shell Scripting</li>
+                            <li><span class="fa-li"><i class="fa-solid fa-hashtag"></i></span>Backend Development</li>
+                            <li><span class="fa-li"><i class="fa-solid fa-hashtag"></i></span>Microservices</li>
+                            <li><span class="fa-li"><i class="fa-solid fa-hashtag"></i></span>API</li>
+                            <li><span class="fa-li"><i class="fa-solid fa-hashtag"></i></span>Git</li>
+                            <li><span class="fa-li"><i class="fa-solid fa-hashtag"></i></span>OOPS</li>
                         </ul>
                     </div>
                     <div class="col-3 section-2-box wow fadeInUp">
-                        <ul class="skill-list">
-                            <li>Stakeholder Management</li>
-                            <li>Team Leadership</li>
-                            <li>Client facing</li>
-                            <li>HTML</li>
-                            <li>Design Patterns</li>
-                            <li>JavaScript</li>
+                        <ul class="fa-ul">
+                            <li><span class="fa-li"><i class="fa-solid fa-hashtag"></i></span>Stakeholder Management
+                            </li>
+                            <li><span class="fa-li"><i class="fa-solid fa-hashtag"></i></span>Team Leadership</li>
+                            <li><span class="fa-li"><i class="fa-solid fa-hashtag"></i></span>Client facing</li>
+                            <li><span class="fa-li"><i class="fa-solid fa-hashtag"></i></span>HTML</li>
+                            <li><span class="fa-li"><i class="fa-solid fa-hashtag"></i></span>Design Patterns</li>
+                            <li><span class="fa-li"><i class="fa-solid fa-hashtag"></i></span>JavaScript</li>
                         </ul>
                     </div>
                     <div class="col-3 section-2-box wow fadeInUp">
-                        <ul class="skill-list">
-                            <li>NoSQL</li>
-                            <li>Docker</li>
-                            <li>Agile</li>
-                            <li>Django Rest Framework</li>
-                            <li>Team Collaboration</li>
+                        <ul class="fa-ul">
+                            <li><span class="fa-li"><i class="fa-solid fa-hashtag"></i></span>NoSQL</li>
+                            <li><span class="fa-li"><i class="fa-solid fa-hashtag"></i></span>Docker</li>
+                            <li><span class="fa-li"><i class="fa-solid fa-hashtag"></i></span>Agile</li>
+                            <li><span class="fa-li"><i class="fa-solid fa-hashtag"></i></span>Django Rest Framework</li>
+                            <li><span class="fa-li"><i class="fa-solid fa-hashtag"></i></span>Team Collaboration</li>
                         </ul>
                     </div>
                 </div>
@@ -272,25 +278,25 @@
                         <h3>Senior Technical Lead</h3>
                         <p>Kimeka - Chennai, India</p>
                         <p><i class="far fa-calendar-days"></i> Oct 2021 - Present</p>
-                        <ul>
-                            <li>
+                        <ul class="fa-ul">
+                            <li><span class="fa-li"><i class="far fa-circle-check"></i></span>
                                 Design and compose the Backend API architecture and workflow for a
                                 Hospitality
                                 Client's trademark solution
                             </li>
-                            <li>Lead the development team, manage project planning, project delivery
+                            <li><span class="fa-li"><i class="far fa-circle-check"></i></span>Lead the development team, manage project planning, project delivery
                                 and code quality and set up the development life-cycle processes
                             </li>
-                            <li>Work directly with clients to establish problem specifications and
+                            <li><span class="fa-li"><i class="far fa-circle-check"></i></span>Work directly with clients to establish problem specifications and
                                 design solutions
                             </li>
-                            <li>Coordinate with Business stakeholders and product owners to ensure
+                            <li><span class="fa-li"><i class="far fa-circle-check"></i></span>Coordinate with Business stakeholders and product owners to ensure
                                 smooth implementation of the application
                             </li>
-                            <li>
+                            <li><span class="fa-li"><i class="far fa-circle-check"></i></span>
                                 Trained team members on how to optimize and ensure the best code quality
                             </li>
-                            <li>Participate in Scrum calls and be the point of contact to the client
+                            <li><span class="fa-li"><i class="far fa-circle-check"></i></span>Participate in Scrum calls and be the point of contact to the client
                                 for any questions or concerns
                             </li>
                         </ul>
@@ -299,21 +305,21 @@
                         <h3>Technical Lead</h3>
                         <p> Future Focus Infotech - Chennai, India</p>
                         <p><i class="far fa-calendar-days"></i> Aug 2019 - Oct 2021</p>
-                        <ul>
-                            <li>
+                        <ul class="fa-ul">
+                            <li><span class="fa-li"><i class="far fa-circle-check"></i></span>
                                 Team and task management along with Product development
                             </li>
-                            <li>Ensure timely delivery of the project and production support</li>
-                            <li>
+                            <li><span class="fa-li"><i class="far fa-circle-check"></i></span>Ensure timely delivery of the project and production support</li>
+                            <li><span class="fa-li"><i class="far fa-circle-check"></i></span>
                                 Automate backend validations and collect metrics
                             </li>
-                            <li>
+                            <li><span class="fa-li"><i class="far fa-circle-check"></i></span>
                                 Develop, monitor, and enforce best practices for software development
                             </li>
-                            <li>Lead a team of developers in an Agile/Scrum environment, facilitating daily
+                            <li><span class="fa-li"><i class="far fa-circle-check"></i></span>Lead a team of developers in an Agile/Scrum environment, facilitating daily
                                 stand-ups, sprint planning, and retrospectives
                             </li>
-                            <li>Research and improve the code quality in Legacy systems</li>
+                            <li><span class="fa-li"><i class="far fa-circle-check"></i></span>Research and improve the code quality in Legacy systems</li>
                         </ul>
                     </div>
                 </div>
@@ -323,26 +329,26 @@
                         <h3>Associate (Sr. Developer)</h3>
                         <p>Cognizant - Bentonville, AR, USA</p>
                         <p><i class="far fa-calendar-days"></i> May 2018 - Aug 2019</p>
-                        <ul>
-                            <li>Work with Business users directly and understand their business problems
+                        <ul class="fa-ul">
+                            <li><span class="fa-li"><i class="far fa-circle-check"></i></span>Work with Business users directly and understand their business problems
                             </li>
-                            <li>Apply business knowledge, arrive at the best business solution</li>
-                            <li>Build production ready and satisfactory solutions in automation scripts</li>
-                            <li>Developed a new algorithm to improve performance</li>
-                            <li>Perform code review and provide constructive feedback</li>
-                            <li>Investigated and resolved several production issues</li>
+                            <li><span class="fa-li"><i class="far fa-circle-check"></i></span>Apply business knowledge, arrive at the best business solution</li>
+                            <li><span class="fa-li"><i class="far fa-circle-check"></i></span>Build production ready and satisfactory solutions in automation scripts</li>
+                            <li><span class="fa-li"><i class="far fa-circle-check"></i></span>Developed a new algorithm to improve performance</li>
+                            <li><span class="fa-li"><i class="far fa-circle-check"></i></span>Perform code review and provide constructive feedback</li>
+                            <li><span class="fa-li"><i class="far fa-circle-check"></i></span>Investigated and resolved several production issues</li>
                         </ul>
                     </div>
                     <div class="col-md-6 section-3-box wow fadeInLeft">
                         <h3>Associate</h3>
                         <p>Cognizant - Chennai, India</p>
                         <p><i class="far fa-calendar-days"></i> Jan 2016 - Apr 2018</p>
-                        <ul>
-                            <li>Work on project deliverables as assigned in JIRA</li>
-                            <li>Coordinate with onsite counterpart and take care of daily task planning</li>
-                            <li>Actively participate in team meetings and provide design review comments
+                        <ul class="fa-ul">
+                            <li><span class="fa-li"><i class="far fa-circle-check"></i></span>Work on project deliverables as assigned in JIRA</li>
+                            <li><span class="fa-li"><i class="far fa-circle-check"></i></span>Coordinate with onsite counterpart and take care of daily task planning</li>
+                            <li><span class="fa-li"><i class="far fa-circle-check"></i></span>Actively participate in team meetings and provide design review comments
                             </li>
-                            <li>Prepare presentations of the new built features</li>
+                            <li><span class="fa-li"><i class="far fa-circle-check"></i></span>Prepare presentations of the new built features</li>
                         </ul>
                     </div>
                 </div>
@@ -352,11 +358,11 @@
                         <h3>Programmer Analyst</h3>
                         <p>Cognizant - Chennai, India</p>
                         <p><i class="far fa-calendar-days"></i> Nov 2012 - Dec 2015</p>
-                        <ul>
-                            <li>Implemented a bash script to automate a recurring manual activity</li>
-                            <li>Migrated legacy data migration scripts to new framework-based script calls
+                        <ul class="fa-ul">
+                            <li><span class="fa-li"><i class="far fa-circle-check"></i></span>Implemented a bash script to automate a recurring manual activity</li>
+                            <li><span class="fa-li"><i class="far fa-circle-check"></i></span>Migrated legacy data migration scripts to new framework-based script calls
                             </li>
-                            <li>Wrote custom code to streamline the processes</li>
+                            <li><span class="fa-li"><i class="far fa-circle-check"></i></span>Wrote custom code to streamline the processes</li>
                         </ul>
                     </div>
                 </div>

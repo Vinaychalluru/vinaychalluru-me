@@ -50,7 +50,7 @@ img { max-width: 100%; }
 	text-indent: -999999px;
 }
 
-.sidebar ul.menu-elements { padding: 10px 0; border-bottom: 1px solid #555; transition: all .3s; }
+.sidebar ul.menu-elements { padding: 35px 0 10px 0; border-bottom: 1px solid #555; transition: all .3s; }
 
 .sidebar ul li a {
 	display: block; padding: 10px 20px;
@@ -302,7 +302,7 @@ a.btn-customized-4.btn-customized-light.btn.btn-primary:not(:disabled):not(.disa
 .top-content .description a { color: #fff; border-color: #fff; }
 .top-content .description a:hover,
 .top-content .description a:focus { color: #fff;}
-.top-content .description ul { list-style-type: disc; text-align: start; }
+.top-content .description ul { text-align: start; }
 
 
 /***** Section 1 *****/
@@ -326,8 +326,6 @@ a.btn-customized-4.btn-customized-light.btn.btn-primary:not(:disabled):not(.disa
 .section-2-box h3 { margin-top: 0; }
 .section-2-box-text .medium-paragraph { margin-top: 20px; margin-bottom: 20px; }
 .section-2-box img { border-radius: 6px; }
-
-.section-2-container .skill-list { list-style-type: none; }
 
 
 /***** Section 3 *****/

@@ -15,9 +15,9 @@ Including another URLconf
 """
 from django.conf.urls.static import static
 from django.urls import path
-from portfolio.settings import FUNCTION_APP_PATH, STATIC_URL, STATIC_ROOT
 
 import about.views
+from portfolio.settings import FUNCTION_APP_PATH, STATIC_URL, STATIC_ROOT
 
 urlpatterns = [
     path(FUNCTION_APP_PATH, about.views.Profile.as_view(), name='profile'),
