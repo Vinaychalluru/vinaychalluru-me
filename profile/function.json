@@ -10,7 +10,7 @@
         "get",
         "post"
       ],
-      "route": "vinaychalluru-me/{*path_info}"
+      "route": "profile/{*path_info}"
     },
     {
       "type": "http",

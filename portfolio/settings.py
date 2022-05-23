@@ -15,12 +15,12 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-FUNCTION_APP_PATH = "api/vinaychalluru-me"
+FUNCTION_APP_PATH = "api/profile"
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
-SECRET_KEY = os.environ["SECRET_KEY"]
+SECRET_KEY = 'os.environ["SECRET_KEY"]'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -118,6 +118,8 @@ USE_TZ = True
 
 STATIC_URL = f"/{FUNCTION_APP_PATH}/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_DIRS = BASE_DIR / "about/static"
+print(STATIC_URL, STATIC_ROOT, STATICFILES_DIRS)
 # WhiteNoise comes with a storage backend which automatically takes care of compressing your files
 # and creating unique names for each version, so they can safely be cached forever
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
