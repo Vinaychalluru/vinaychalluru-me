@@ -21,7 +21,7 @@ from portfolio.settings import FUNCTION_APP_PATH, STATIC_URL, STATIC_ROOT
 
 urlpatterns = [
     path(FUNCTION_APP_PATH + '/', about.views.Profile.as_view(), name='profile'),
-    path(FUNCTION_APP_PATH + '/about_me/', about.views.Profile.as_view(), name='profile'),
+    path(FUNCTION_APP_PATH + '/profile/', about.views.Profile.as_view(), name='profile'),
     path(FUNCTION_APP_PATH + '/download_resume/', about.views.DownloadResume.as_view(), name='download_resume')
 ]
 
