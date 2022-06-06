@@ -1,17 +1,7 @@
-from django.views.generic import TemplateView, View
-from django.http.response import FileResponse, HttpResponseServerError
 import logging
 
-
-class AboutMe(TemplateView):
-    template_name = "about_me.html"
-
-    def get(self, request, *args, **kwargs):
-        try:
-            return super(AboutMe, self).get(request, *args, **kwargs)
-        except Exception as ex:
-            logging.error(ex.args[0], exc_info=True)
-            return HttpResponseServerError(content=ex.args[0])
+from django.http.response import FileResponse, HttpResponseServerError
+from django.views.generic import TemplateView, View
 
 
 class Profile(TemplateView):
