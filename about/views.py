@@ -20,7 +20,7 @@ class DownloadResume(View):
     def get(self, request, *args, **kwargs):
         try:
             from portfolio.settings import FILES_DIR
-            resume_filename = "Vinay_10.9Y_Solution_Architect.pdf"
+            resume_filename = "Vinay_11Y_Solution_Architect.pdf"
             resume_file = FILES_DIR / resume_filename
             return FileResponse(open(resume_file, 'rb'), as_attachment=True, filename=resume_filename, status=200)
         except Exception as ex:
