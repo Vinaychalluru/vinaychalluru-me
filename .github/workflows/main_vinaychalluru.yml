@@ -12,7 +12,7 @@ on:
 
 env:
   AZURE_FUNCTIONAPP_PACKAGE_PATH: '.' # set this to the path to your web app project, defaults to the repository root
-  PYTHON_VERSION: '3.8' # set this to the python version to use (supports 3.6, 3.7, 3.8)
+  PYTHON_VERSION: '3.11' # set this to the python version to use (supports 3.6, 3.7, 3.8)
 
 jobs:
   build:
@@ -45,7 +45,7 @@ jobs:
             !venv/
 
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     needs: build
     environment:
       name: 'Production'
@@ -59,7 +59,7 @@ jobs:
           path: .
 
       - name: 'Deploy to Azure Functions'
-        uses: Azure/functions-action@v4
+        uses: Azure/functions-action@v1
         id: deploy-to-function
         with:
           app-name: 'vinaychalluru'
