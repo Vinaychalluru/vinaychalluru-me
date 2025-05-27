@@ -39,17 +39,6 @@ img { max-width: 100%; }
 
 .dismiss:hover, .dismiss:focus { background: #777; color: #fff; }
 
-.sidebar .logo { padding: 40px 20px; border-bottom: 1px solid #555; transition: all .3s; }
-
-.sidebar .logo a {
-	display: inline-block;
-	width: 172px;
-	height: 34px;
-	background: url(../images/VC_SquareCut.jpg) left top no-repeat;
-	border: 0;
-	text-indent: -999999px;
-}
-
 .sidebar ul.menu-elements { padding: 35px 0 10px 0; border-bottom: 1px solid #555; transition: all .3s; }
 
 .sidebar ul li a {
@@ -86,8 +75,6 @@ img { max-width: 100%; }
 
 .sidebar .to-top { padding: 20px; text-align: center; }
 
-.sidebar .dark-light-buttons { padding: 10px 20px 30px 20px; text-align: center; }
-
 /* sidebar light */
 
 .sidebar.light { background: #fff; }
@@ -96,9 +83,6 @@ img { max-width: 100%; }
 
 .sidebar.light .dismiss:hover,
 .sidebar.light .dismiss:focus { background: #ccc; }
-
-.sidebar.light .logo { border-color: #eee; }
-.sidebar.light .logo a { background-image: url(../images/VC_SquareCut.jpg); }
 
 .sidebar.light ul.menu-elements { border-color: #eee; }
 
@@ -138,22 +122,6 @@ img { max-width: 100%; }
 .sidebar.light a.btn-customized-4.btn-customized-dark:focus,
 .sidebar.light a.btn-customized-4.btn-customized-dark:active:focus,
 .sidebar.light a.btn-customized-4.btn-customized-dark.active:focus,
-.sidebar.light a.btn-customized-4.btn-customized-dark.btn.btn-primary:not(:disabled):not(.disabled):active,
-.sidebar.light a.btn-customized-4.btn-customized-dark.btn.btn-primary:not(:disabled):not(.disabled):active:focus {
-	background: #ccc; color: #fff;
-}
-
-.sidebar.light a.btn-customized-4.btn-customized-light:hover,
-.sidebar.light a.btn-customized-4.btn-customized-light:active,
-.sidebar.light a.btn-customized-4.btn-customized-light:focus,
-.sidebar.light a.btn-customized-4.btn-customized-light:active:focus,
-.sidebar.light a.btn-customized-4.btn-customized-light.active:focus,
-.sidebar.light a.btn-customized-4.btn-customized-light.btn.btn-primary:not(:disabled):not(.disabled):active,
-.sidebar.light a.btn-customized-4.btn-customized-light.btn.btn-primary:not(:disabled):not(.disabled):active:focus {
-	background: #ccc; color: #fff;
-}
-
-
 /***** Dark overlay *****/
 
 .overlay {
@@ -235,36 +203,6 @@ a.btn-customized-3.btn.btn-primary:not(:disabled):not(.disabled):active:focus {
 a.btn-customized i,
 a.btn-customized-2 i,
 a.btn-customized-3 i { margin-right: 5px; }
-
-
-a.btn-customized-4 {
-	display: inline-block; width: 28px; height: 28px; margin: 0 3px; padding: 0;
-	background: #555; border: 0; border-radius: 50%;
-	font-size: 16px; font-weight: 300; color: #fff; box-shadow: none; text-indent: -999999px;
-}
-
-a.btn-customized-4.btn-customized-dark { background: #222; }
-a.btn-customized-4.btn-customized-light { background: #fff; }
-
-a.btn-customized-4.btn-customized-dark:hover,
-a.btn-customized-4.btn-customized-dark:active,
-a.btn-customized-4.btn-customized-dark:focus,
-a.btn-customized-4.btn-customized-dark:active:focus,
-a.btn-customized-4.btn-customized-dark.active:focus,
-a.btn-customized-4.btn-customized-dark.btn.btn-primary:not(:disabled):not(.disabled):active,
-a.btn-customized-4.btn-customized-dark.btn.btn-primary:not(:disabled):not(.disabled):active:focus {
-	outline: 0; background: #777; border: 0; color: #fff; box-shadow: none;
-}
-
-a.btn-customized-4.btn-customized-light:hover,
-a.btn-customized-4.btn-customized-light:active,
-a.btn-customized-4.btn-customized-light:focus,
-a.btn-customized-4.btn-customized-light:active:focus,
-a.btn-customized-4.btn-customized-light.active:focus,
-a.btn-customized-4.btn-customized-light.btn.btn-primary:not(:disabled):not(.disabled):active,
-a.btn-customized-4.btn-customized-light.btn.btn-primary:not(:disabled):not(.disabled):active:focus {
-	outline: 0; background: #777; border: 0; color: #fff; box-shadow: none;
-}
 
 
 /***** General style, all sections *****/
@@ -364,69 +302,6 @@ a.btn-customized-4.btn-customized-light.btn.btn-primary:not(:disabled):not(.disa
 .section-5-box-date i { padding-right: 5px; color: #ddd; }
 
 .section-5-container .section-bottom-button { padding-top: 40px; text-align: left; }
-
-
-/***** Section 6 *****/
-.section-6-container { background-color: #e1ecf0; }
-.section-6-box { padding-top: 30px; text-align: left; }
-
-.section-6-box h3 { margin-top: 0; }
-
-/* contact form */
-.section-6-form { padding-top: 20px; text-align: left; }
-
-.section-6-form input[type="text"],
-.section-6-form textarea {
-    background: none; border: 1px solid #fff;
-    font-size: 16px; font-weight: 300; color: #fff;
-    box-shadow: none;
-    transition: all .3s;
-}
-
-.section-6-form textarea { height: 90px; }
-
-.section-6-form input[type="text"]:focus,
-.section-6-form textarea:focus { outline: 0; background: #fff; border: 1px solid #fff; box-shadow: none; }
-
-.section-6-form input[type="text"].input-error,
-.section-6-form textarea.input-error { border-color: #369188; }
-
-.section-6-form input[type="text"]::-moz-placeholder,
-.section-6-form textarea::-moz-placeholder { color: #ccc; font-style: italic; }
-
-.section-6-form input[type="text"]:-ms-input-placeholder,
-.section-6-form textarea:-ms-input-placeholder { color: #ccc; font-style: italic; }
-
-.section-6-form input[type="text"]::-webkit-input-placeholder,
-.section-6-form textarea::-webkit-input-placeholder { color: #ccc; font-style: italic; }
-
-.section-6-form button.btn-customized {
-	padding: .75rem 1.5rem;
-	background: #369188; border: 0; border-radius: 4px;
-	font-size: 16px; font-weight: 300; color: #fff; box-shadow: none;
-}
-
-.section-6-form button.btn-customized:hover,
-.section-6-form button.btn-customized:active,
-.section-6-form button.btn-customized:focus,
-.section-6-form button.btn-customized:active:focus,
-.section-6-form button.btn-customized.active:focus,
-.section-6-form button.btn.btn-primary:not(:disabled):not(.disabled):active,
-.section-6-form button.btn.btn-primary:not(:disabled):not(.disabled):active:focus {
-	outline: 0; background: #47bbaf; border: 0; color: #fff; box-shadow: none;
-}
-
-.section-6-form button.btn-customized i { margin-right: 5px; }
-/* end contact form */
-
-.section-6-social { padding-top: 20px; }
-
-.section-6-social a {
-	display: inline-block; width: 46px; height: 46px; margin: 0 10px 10px 0;
-	background: #fff; border: 0; border-radius: 50%; text-align: center; line-height: 46px;
-}
-.section-6-social a:hover,
-.section-6-social a:focus { background: #ccc; border: 0; }
 
 
 /***** Footer *****/
