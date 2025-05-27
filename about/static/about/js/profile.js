@@ -10,41 +10,52 @@ function scroll_to(clicked_link, nav_height) {
     }
 }
 
-
-jQuery(document).ready(function () {
+document.addEventListener('DOMContentLoaded', function() {
 
     /*
         Sidebar
     */
-    $('.dismiss, .overlay').on('click', function () {
-        $('.sidebar').removeClass('active');
-        $('.overlay').removeClass('active');
+    document.querySelectorAll('.dismiss, .overlay').forEach(function(element) {
+        element.addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.remove('active');
+            document.querySelector('.overlay').classList.remove('active');
+        });
     });
 
-    $('.open-menu').on('click', function (e) {
-        e.preventDefault();
-        $('.sidebar').addClass('active');
-        $('.overlay').addClass('active');
-        // close opened sub-menus
-        $('.collapse.show').toggleClass('show');
-        $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+    document.querySelectorAll('.open-menu').forEach(function(element) {
+        element.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector('.sidebar').classList.add('active');
+            document.querySelector('.overlay').classList.add('active');
+            // close opened sub-menus
+            document.querySelectorAll('.collapse.show').forEach(function(subMenu) {
+                subMenu.classList.remove('show'); // Simpler than toggle if the goal is just to remove 'show'
+            });
+            document.querySelectorAll('a[aria-expanded=true]').forEach(function(link) {
+                link.setAttribute('aria-expanded', 'false');
+            });
+        });
     });
+
     /* change sidebar style */
-    $('a.btn-customized-dark').on('click', function (e) {
-        e.preventDefault();
-        $('.sidebar').removeClass('light');
+    document.querySelectorAll('a.btn-customized-dark').forEach(function(element) {
+        element.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector('.sidebar').classList.remove('light');
+        });
     });
-    $('a.btn-customized-light').on('click', function (e) {
-        e.preventDefault();
-        $('.sidebar').addClass('light');
+
+    document.querySelectorAll('a.btn-customized-light').forEach(function(element) {
+        element.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector('.sidebar').classList.add('light');
+        });
     });
+
     /* replace the default browser scrollbar in the sidebar, in case the sidebar menu has a height that is bigger than the viewport */
-    $('.sidebar').mCustomScrollbar({
-        theme: "minimal-dark"
-    });
 
     /*
-        Navigation
+        Navigation (jQuery dependent scrolling, leave as is)
     */
     $('a.scroll-link').on('click', function (e) {
         e.preventDefault();
