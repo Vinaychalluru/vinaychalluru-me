@@ -1,0 +1,12 @@
+{
+    "paths": {
+        "about/css/bootstrap.min.css": "about/css/bootstrap.min.2ca744602578.css",
+        "about/css/profile.css": "about/css/profile.f38e62408784.css",
+        "about/icons/VinayChalluru.ico": "about/icons/VinayChalluru.4cdf6fc717b1.ico",
+        "about/images/VC_SquareCut.jpg": "about/images/VC_SquareCut.44bf0a6ad504.jpg",
+        "about/js/bootstrap.bundle.min.js": "about/js/bootstrap.bundle.min.a1d2122d8c5c.js",
+        "about/js/jQuery.min.js": "about/js/jQuery.min.3e4bb227fb55.js",
+        "about/js/profile.js": "about/js/profile.4d462df4d2f7.js"
+    },
+    "version": "1.0"
+}

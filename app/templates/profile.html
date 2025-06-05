@@ -1,7 +1,5 @@
 <!doctype html>
 <html lang="en">
-{% load static %}
-
 <head itemscope="" itemtype="https://schema.org/WebSite">
     <title itemprop="name">Vinay's Profile</title>
 
@@ -15,12 +13,12 @@
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="{% static 'about/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'about/css/profile.css' %}">
+    <link rel="stylesheet" href="{{ url_for('static', path='about/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='about/css/profile.css') }}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css">
 
     <!-- Favicon and touch icons -->
-    <link rel="shortcut icon" type="image/x-icon" href="{% static 'about/icons/VinayChalluru.ico' %}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', path='about/icons/VinayChalluru.ico') }}">
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3LWVQ0XHJS"></script>
     <script>
@@ -172,8 +170,7 @@
                                 <a class="btn btn-primary btn-customized scroll-link" href="#section-3" role="button">
                                     <i class="fas fa-laptop-code"></i>Work Experience
                                 </a>
-                                <a class="btn btn-primary btn-customized" href="{% url 'download_resume' %}"
-                                    role="button">
+                                <a class="btn btn-primary btn-customized" href="/download-resume" role="button">
                                     <i class="fas fa-download"></i>Resume
                                 </a>
                             </div>
@@ -531,7 +528,7 @@
                                         <div class="card-body">
                                             <i class="fas fa-trophy icon-box medium rounded-3 mb-4"></i>
                                             <h3 class="h5 mb-3">Accountability Award</h3>
-                                            <p class="mb-0">Appreciated with ‘Accountability award’ for Q3 FY20
+                                            <p class="mb-0">Appreciated with 'Accountability award' for Q3 FY20
                                                 considering
                                                 my responsible team handling abilities</p>
                                         </div>
@@ -542,7 +539,7 @@
                                         <div class="card-body">
                                             <i class="fas fa-trophy icon-box medium rounded-3 mb-4"></i>
                                             <h3 class="h5 mb-3">Mastering Emerging Tech - Conv UI</h3>
-                                            <p class="mb-0">Recognized with ‘Mastering Emerging Tech – Conv UI’ award
+                                            <p class="mb-0">Recognized with 'Mastering Emerging Tech – Conv UI' award
                                                 during
                                                 Cognizant Annual Awards 2018 for my contributions towards Slack Bot</p>
                                         </div>
@@ -555,7 +552,7 @@
                                             <h3 class="h5 mb-3">Shishya Award</h3>
                                             <p class="mb-0">Appreciated for my efforts in guiding and mentoring trainees
                                                 by
-                                                presenting ‘Shishya Award’</p>
+                                                presenting 'Shishya Award'</p>
                                         </div>
                                     </div>
                                 </div>
@@ -571,13 +568,13 @@
                     <div class="row">
                         <div class="col section-5 section-description">
                             <h2>Achievements</h2>
-                            <p>Rewarded for improving Client’s core computation logic performance by 70% using code
+                            <p>Rewarded for improving Client's core computation logic performance by 70% using code
                                 profiling tools</p>
                             <p>Appreciated by Client for quickly implementing a solution in Azure Functions</p>
                             <p>Developed a Shell script for automating a task which was added to Cognizant Innovation
                                 Portfolio</p>
                             <p>Received several internal team appreciations and client mentions for distinctive efforts
-                                which had garnered me ‘Cognizant Business Allowance’ payout twice</p>
+                                which had garnered me 'Cognizant Business Allowance' payout twice</p>
                         </div>
                     </div>
                 </div>
@@ -613,9 +610,9 @@
         </main>
 
         <!-- Javascript -->
-        <script src="{% static 'about/js/jQuery.min.js' %}"></script>
-        <script src="{% static 'about/js/bootstrap.bundle.min.js' %}"></script>
-        <script src="{% static 'about/js/profile.js' %}"></script>
+        <script src="{{ url_for('static', path='about/js/jQuery.min.js') }}"></script>
+        <script src="{{ url_for('static', path='about/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ url_for('static', path='about/js/profile.js') }}"></script>
 </body>
 
 </html>
