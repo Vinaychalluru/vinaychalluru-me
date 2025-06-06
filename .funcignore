@@ -6,3 +6,4 @@ local.settings.json
 test
 venv
 .venv
+.venv_fastapi
