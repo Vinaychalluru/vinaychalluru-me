@@ -8,7 +8,7 @@ STATIC_DIR = BASE_DIR / "staticfiles"
 TEMPLATES_DIR = BASE_DIR / "templates"
 
 # Resume file
-RESUME_FILENAME = "Vinay_12Y_Solution_Architect.pdf"
+RESUME_FILENAME = "Vinay_13Y_Solution_Architect.pdf"
 RESUME_PATH = STATIC_DIR / "about" / "files" / RESUME_FILENAME
 
 # Profile data
