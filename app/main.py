@@ -40,6 +40,13 @@ async def global_exception_handler(request: Request, exc: Exception) -> JSONResp
     )
 
 
+@app.get('/favicon.ico', include_in_schema=False)
+async def favicon():
+    favicon_path = STATIC_DIR / 'about' / 'icons' / 'VinayChalluru.ico'
+    if favicon_path.exists():
+        return FileResponse(str(favicon_path))
+    return JSONResponse(status_code=404, content={"detail": "Not Found"})
+
 @app.get("/", response_class=HTMLResponse)
 async def home(request: Request) -> HTMLResponse:
     """

@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="en">
+
 <head itemscope="" itemtype="https://schema.org/WebSite">
     <title itemprop="name">Vinay's Profile</title>
-
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -12,613 +12,406 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no">
 
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;600;800&display=swap"
+        rel="stylesheet">
+
     <!-- CSS -->
     <link rel="stylesheet" href="{{ url_for('static', path='about/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', path='about/css/profile.css') }}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css">
+    <!-- AOS CSS for animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', path='about/css/profile.css') }}">
 
-    <!-- Favicon and touch icons -->
+    <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', path='about/icons/VinayChalluru.ico') }}">
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3LWVQ0XHJS"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-
+        function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-
         gtag('config', 'G-3LWVQ0XHJS');
     </script>
 </head>
 
 <body>
-
-    <!-- Wrapper -->
-    <div class="wrapper">
-
-        <!-- Sidebar -->
-        <nav class="sidebar">
-
-            <!-- close sidebar menu -->
-            <div class="dismiss">
-                <i class="fas fa-arrow-left"></i>
-            </div>
-            <div>
-                <p></p>
-            </div>
-
-            <ul class="list-unstyled menu-elements">
-                <li class="active">
-                    <a class="scroll-link" href="#top-content"><i class="fas fa-user-alt"></i>About Me</a>
-                </li>
-                <li>
-                    <a class="scroll-link" href="#section-education-experience"><i class="fas fa-book-open-reader"></i>Education &
-                        Experience</a>
-                </li>
-                <li>
-                    <a class="scroll-link" href="#section-skills"><i class="fas fa-code"></i>Skills</a>
-                </li>
-                <li>
-                    <a class="scroll-link" href="#section-work-experience"><i class="fas fa-laptop-code"></i>Work Experience</a>
-                </li>
-                <li>
-                    <a class="scroll-link" href="#section-awards"><i class="fas fa-ranking-star"></i>Awards</a>
-                </li>
-                <li>
-                    <a class="scroll-link" href="#section-achievements"><i class="fas fa-hands-clapping"></i>Achievements</a>
-                </li>
-            </ul>
-
-            <div class="to-top">
-                <a class="btn btn-primary btn-customized-3" href="#" role="button">
-                    <i class="fas fa-arrow-up"></i>Top
-                </a>
-            </div>
-
-        </nav>
-        <!-- End sidebar -->
-
-        <!-- Dark overlay -->
-        <div class="overlay"></div>
-
-        <!-- Content -->
-        <main class="content">
-
-            <!-- open sidebar menu -->
-            <a class="btn btn-primary btn-customized open-menu" href="#" role="button">
-                <i class="fas fa-bars"></i> <span>Menu</span>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top premium-nav">
+        <div class="container">
+            <a class="navbar-brand font-outfit fw-bold text-dark" href="#">
+                Vinay Challuru
             </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars text-primary-brand"></i>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav align-items-center gap-3">
+                    <li class="nav-item"><a class="nav-link scroll-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link scroll-link" href="#expertise">Expertise</a></li>
+                    <li class="nav-item"><a class="nav-link scroll-link" href="#experience">Experience</a></li>
+                    <li class="nav-item"><a class="nav-link scroll-link" href="#awards">Awards</a></li>
+                    <li class="nav-item mt-2 mt-lg-0">
+                        <a class="btn btn-primary-custom" href="/download-resume" role="button">
+                            <i class="fas fa-download me-2"></i>Resume
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-            <!-- Top content -->
-            <section class="top-content section-container" id="top-content">
-                <div class="container">
-                    <div class="row">
-                        <div class="col top-content description">
-                            <h2>About Me</h2>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col col-md-10 offset-md-1 col-lg-8 offset-lg-2">
-                            <div class="description">
-                                I am a Python, cloud, and Linux engineer with a passion for using technology to solve
-                                business problems. I have a proven track record of success in delivering innovative
-                                solutions, and I am committed to making a positive impact on the world.
-                            </div>
-                            <div class="description">
-                                Solution Architect with a focus on cloud-based platforms, experienced in Python, Django,
-                                REST APIs, SQL, Azure/GCP, Product Design, Project delivery, and Team management.
-                            </div>
-                        </div>
-                        <div class="col col-md-10 offset-md-1 col-lg-8 offset-lg-2">
-                            <div class="description">
-                                <ul class="fa-ul">
-                                    <li><span class="fa-li"><i class="fas fa-check-square"></i></span>Experienced
-                                        <strong>Python lead developer </strong>skilled
-                                        in
-                                        <strong>Django, Django Rest Framework, Microservices, API development, Azure,
-                                            SQL,
-                                            Team management and Project delivery</strong>
-                                    </li>
-                                    <li><span class="fa-li"><i class="fas fa-check-square"></i></span><strong>13+ years
-                                            of industry
-                                            experience </strong>with<strong>
-                                            8+ years in team leadership</strong>, team management, project ownership
-                                        and
-                                        project
-                                        delivery
-                                    </li>
-                                    <li><span class="fa-li"><i class="fas fa-check-square"></i></span><strong>Managed
-                                            Agile teams, handled the project
-                                            deliverables </strong>and <strong>mentored trainees</strong></li>
-                                    <li><span class="fa-li"><i class="fas fa-check-square"></i></span>Contributed to
-                                        <strong>Project Planning,</strong> <strong>Product
-                                            design </strong>and <strong>Customer Delivery</strong>
-                                    </li>
-                                    <li><span class="fa-li"><i class="fas fa-check-square"></i></span><strong>Built
-                                            client-oriented solutions</strong> by
-                                        thoroughly
-                                        examining background of the problems
-                                    </li>
-                                    <li><span class="fa-li"><i class="fas fa-check-square"></i></span>Skilled user in
-                                        <strong>Pycharm Professional, Visual
-                                            Studio
-                                            Code, Git, Agile / Scrum</strong>
-                                    </li>
-                                    <li><span class="fa-li"><i class="fas fa-check-square"></i></span>I closely follow
-                                        the latest trends in IT Business
-                                        processes,
-                                        Technological advancements, and Innovative solutions in <strong>Retail
-                                        </strong>(Purchasing,
-                                        Logistics and Warehouse management systems), <strong>Insurance</strong>,
-                                        <strong>Banking </strong>and
-                                        <strong>Hospitality </strong>industries
-                                    </li>
-                                    <li><span class="fa-li"><i class="fas fa-check-square"></i></span>Believes in -
-                                        <strong>Anybody can learn a new
-                                            skill </strong>with
-                                        passion and spirit
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="buttons">
-                                <a class="btn btn-primary btn-customized scroll-link" href="#section-skills" role="button">
-                                    <i class="fas fa-code"></i>Skills
-                                </a>
-                                <a class="btn btn-primary btn-customized scroll-link" href="#section-work-experience" role="button">
-                                    <i class="fas fa-laptop-code"></i>Work Experience
-                                </a>
-                                <a class="btn btn-primary btn-customized scroll-link" href="#section-awards" role="button">
-                                    <i class="fas fa-ranking-star"></i>Awards
-                                </a>
-                                <a class="btn btn-primary btn-customized scroll-link" href="#section-achievements" role="button">
-                                    <i class="fas fa-hands-clapping"></i>Achievements
-                                </a>
-                                <a class="btn btn-primary btn-customized" href="/download-resume" role="button">
-                                    <i class="fas fa-download"></i>Resume
-                                </a>
-                            </div>
+    <!-- Hero Section -->
+    <section class="hero-section d-flex align-items-center" id="about">
+        <div class="hero-bg-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+        </div>
+        <div class="container position-relative z-1">
+            <div class="row align-items-center min-vh-100 mt-5 pt-5">
+                <div class="col-lg-7" data-aos="fade-up" data-aos-duration="1000">
+                    <span class="badge premium-badge mb-3">Solution Architect & Lead</span>
+                    <h1 class="display-3 fw-bolder font-outfit text-dark mb-4">
+                        Building <span class="text-gradient">Innovative</span><br /> Cloud Solutions.
+                    </h1>
+                    <p class="lead text-muted mb-4 pe-lg-5">
+                        Solution Architect | Cloud-Native Platforms (Azure, AWS, GCP) | Embracing the AI evolution
+                        through hand-in-hand development and cloud-first solutions | Expert in Python, REST APIs, SQL,
+                        Product Design & Team Management
+                    </p>
+                    <div class="d-flex flex-wrap gap-3 mt-4">
+                        <a href="#experience" class="btn btn-primary-custom scroll-link">
+                            My Journey <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
+                        <div class="social-links d-flex align-items-center gap-3 ms-lg-3">
+                            <a href="https://github.com/Vinaychalluru" target="_blank" class="social-icon"><i
+                                    class="fab fa-github"></i></a>
+                            <a href="https://twitter.com/vinaychalluru" target="_blank" class="social-icon"><i
+                                    class="fab fa-twitter"></i></a>
+                            <a href="https://www.linkedin.com/in/vinaychalluru/" target="_blank" class="social-icon"><i
+                                    class="fab fa-linkedin-in"></i></a>
                         </div>
                     </div>
                 </div>
-            </section>
-
-            <!-- Section 1 -->
-            <section class="section-1-container section-container" id="section-education-experience">
-                <div class="container">
-                    <div class="row">
-                        <div class="mb-5">
-                            <div class="row mt-n4">
-                                <div class="col-sm-6 col-xl-4 mt-4">
-                                    <div class="card text-center border-0 rounded-3">
-                                        <div class="card-body">
-                                            <i class="fas fa-book-open-reader icon-box medium rounded-3 mb-4"></i>
-                                            <h3 class="h5 mb-3">Education</h3>
-                                            <p class="mb-0">M.S. Software Engineering</p>
-                                            <p class="mb-0">VIT University</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-xl-4 mt-4">
-                                    <div class="card text-center border-0 rounded-3">
-                                        <div class="card-body">
-                                            <i class="fas fa-laptop-code icon-box medium rounded-3 mb-4"></i>
-                                            <h3 class="h5 mb-3">Experience</h3>
-                                            <p class="mb-0">13+ years in IT Industry</p>
-                                            <p class="mb-0">8+ years in Leadership roles</p>
-                                            <p class="mb-0"></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-xl-4 mt-4">
-                                    <div class="card text-center border-0 rounded-3">
-                                        <div class="card-body"><i
-                                                class="fas fa-thumbs-up icon-box medium rounded-3 mb-4"></i>
-                                            <h3 class="h5 mb-3">Interests</h3>
-                                            <p class="mb-0">Revenue generation</p>
-                                            <p class="mb-0">Automation & Scripting</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                <!-- Interactive Highlights -->
+                <div class="col-lg-5 mt-5 mt-lg-0" data-aos="fade-left" data-aos-duration="1200" data-aos-delay="200">
+                    <div class="glass-card p-4">
+                        <h4 class="font-outfit fw-bold mb-4"><i class="fas fa-bolt text-warning me-2"></i> Quick Facts
+                        </h4>
+                        <ul class="custom-list ps-0 mb-0">
+                            <li><i class="fas fa-check"></i>&nbsp;<span class="ms-1"><strong>13+ years</strong> of IT
+                                    Industry experience</span></li>
+                            <li><i class="fas fa-check"></i>&nbsp;<span class="ms-1"><strong>8+ years</strong> leading &
+                                    mentoring teams</span></li>
+                            <li><i class="fas fa-check"></i>&nbsp;<span class="ms-1">Proficient in <strong>Python,
+                                        Microservices</strong></span></li>
+                            <li><i class="fas fa-check"></i>&nbsp;<span class="ms-1">Cloud infrastructure via
+                                    <strong>Azure, AWS & GCP</strong></span></li>
+                            <li><i class="fas fa-check"></i>&nbsp;<span class="ms-1">Managed
+                                    <strong>Agile/Scrum</strong> project delivery</span></li>
+                            <li><i class="fas fa-check"></i>&nbsp;<span class="ms-1">M.S. Software Engineering from
+                                    <strong>VIT</strong></span></li>
+                        </ul>
                     </div>
                 </div>
-            </section>
+            </div>
+        </div>
+    </section>
 
-            <!-- Section 2 -->
-            <section class="section-2-container section-container" id="section-skills">
-                <div class="container">
-                    <div class="row">
-                        <div class="col section-2 section-description">
-                            <h2>Skills</h2>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="mb-5">
-                            <div class="row mt-n4">
-                                <div class="col-sm-3 mt-4 section-2-box">
-                                    <ul class="fa-ul">
-                                        <li><span class="fa-li"><i class="fas fa-hashtag"></i></span>Python</li>
-                                        <li><span class="fa-li"><i class="fas fa-hashtag"></i></span>Django</li>
-                                        <li><span class="fa-li"><i class="fas fa-hashtag"></i></span>RESTful Web
-                                            services
-                                        </li>
-                                        <li><span class="fa-li"><i class="fas fa-hashtag"></i></span>Microservices</li>
-                                        <li><span class="fa-li"><i class="fas fa-hashtag"></i></span>API</li>
-                                        <li><span class="fa-li"><i class="fas fa-hashtag"></i></span>Azure</li>
-                                    </ul>
-                                </div>
-                                <div class="col-sm-3 mt-4 section-2-box">
-                                    <ul class="fa-ul">
-                                        <li><span class="fa-li"><i class="fas fa-hashtag"></i></span>SQL / Django ORM
-                                        </li>
-                                        <li><span class="fa-li"><i class="fas fa-hashtag"></i></span>Linux / Shell
-                                            scripting
-                                        </li>
-                                        <li><span class="fa-li"><i class="fas fa-hashtag"></i></span>Performance
-                                            analysis
-                                        </li>
-                                        <li><span class="fa-li"><i class="fas fa-hashtag"></i></span>Object Oriented
-                                            Programming
-                                        </li>
-                                        <li><span class="fa-li"><i class="fas fa-hashtag"></i></span>Code profiling</li>
-                                        <li><span class="fa-li"><i class="fas fa-hashtag"></i></span>Docker</li>
-                                    </ul>
-                                </div>
-                                <div class="col-sm-3 mt-4 section-2-box">
-                                    <ul class="fa-ul">
-                                        <li><span class="fa-li"><i class="fas fa-hashtag"></i></span>Backend development
-                                        </li>
-                                        <li><span class="fa-li"><i class="fas fa-hashtag"></i></span>Systems integration
-                                        </li>
-                                        <li><span class="fa-li"><i class="fas fa-hashtag"></i></span>Load testing</li>
-                                        <li><span class="fa-li"><i class="fas fa-hashtag"></i></span>Gap analysis</li>
-                                        <li><span class="fa-li"><i class="fas fa-hashtag"></i></span>Cloud computing
-                                        </li>
-                                        <li><span class="fa-li"><i class="fas fa-hashtag"></i></span>Git</li>
-                                    </ul>
-                                </div>
-                                <div class="col-sm-3 mt-4 section-2-box">
-                                    <ul class="fa-ul">
-                                        <li><span class="fa-li"><i class="fas fa-hashtag"></i></span>Agile / Scrum</li>
-                                        <li><span class="fa-li"><i class="fas fa-hashtag"></i></span>Client management
-                                        </li>
-                                        <li><span class="fa-li"><i class="fas fa-hashtag"></i></span>Team collaboration
-                                        </li>
-                                        <li><span class="fa-li"><i class="fas fa-hashtag"></i></span>Project ownership
-                                        </li>
-                                        <li><span class="fa-li"><i class="fas fa-hashtag"></i></span>Team leadership
-                                        </li>
-                                        <li><span class="fa-li"><i class="fas fa-hashtag"></i></span>Mentoring</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+    <!-- Skills/Expertise -->
+    <section class="section-padding bg-light-modern" id="expertise">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="text-uppercase text-primary-brand fw-bold tracking-wide">Core Capabilities</span>
+                <h2 class="display-5 font-outfit fw-bold mt-2">Skills & Expertise</h2>
+                <div class="title-divider mx-auto my-3"></div>
+            </div>
+
+            <div class="row g-4 justify-content-center">
+                <!-- AI Agentic Development -->
+                <div class="col-12 col-md-6 col-lg-4 col-xl" data-aos="fade-up" data-aos-delay="100">
+                    <div class="skill-card">
+                        <div class="skill-icon"><i class="fas fa-brain"></i></div>
+                        <h5 class="fw-bold">AI Agentic Development</h5>
+                        <ul class="list-unstyled text-muted mt-3">
+                            <li>Tool-assisted Coding</li>
+                            <li>AntiGravity</li>
+                            <li>Claude</li>
+                            <li>Rapidly Evolving AI Tools</li>
+                        </ul>
                     </div>
                 </div>
-            </section>
-
-            <!-- Section 3 -->
-            <section class="section-3-container section-container" id="section-work-experience">
-                <div class="container">
-
-                    <div class="row">
-                        <div class="col section-3 section-description">
-                            <h2>Work Experience</h2>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-2 section-3-box">
-                        </div>
-                        <div class="col-md-8 section-3-box">
-                            <h3>Solution Architect</h3>
-                            <p>GyanSys - Chennai, India</p>
-                            <p><i class="far fa-calendar-days"></i> Jul 2023 - Present</p>
-                            <ul class="fa-ul">
-                                <li><span class="fa-li"><i class="far fa-circle-check"></i></span>Designed and
-                                    implemented a serverless architecture on Azure for a Hospitality client
-                                </li>
-                                <li><span class="fa-li"><i class="far fa-circle-check"></i></span>Configured a gateway,
-                                    nginx, and Gunicorn to load balance traffic across multiple servers
-                                </li>
-                                <li><span class="fa-li"><i class="far fa-circle-check"></i></span>
-                                    Led a team of engineers in the development of a cloud-based platform, mentoring and
-                                    training them on the latest cloud technologies
-                                </li>
-                                <li><span class="fa-li"><i class="far fa-circle-check"></i></span>Managed the project
-                                    delivery of several critical projects.
-                                </li>
-                                <li><span class="fa-li"><i class="far fa-circle-check"></i></span>Trained a team of professionals from diverse programming backgrounds in Python and API development.
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-md-2 section-3-box">
-                        </div>
-
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6 section-3-box">
-                            <h3>Python Lead Developer</h3>
-                            <p>Solaris Softlabs - Chennai, India</p>
-                            <p><i class="far fa-calendar-days"></i> Sep 2022 - Jun 2023</p>
-                            <ul class="fa-ul">
-                                <li><span class="fa-li"><i class="far fa-circle-check"></i></span>
-                                    Design and maintain the Backend API architecture and workflow for a
-                                    Hospitality
-                                    Client's trademark solution
-                                </li>
-                                <li><span class="fa-li"><i class="far fa-circle-check"></i></span>Lead the development
-                                    team,
-                                    manage project planning, project delivery
-                                </li>
-                                <li><span class="fa-li"><i class="far fa-circle-check"></i></span>Work directly with
-                                    clients
-                                    to establish problem specifications and
-                                    design solutions
-                                </li>
-                                <li><span class="fa-li"><i class="far fa-circle-check"></i></span>Coordinate with
-                                    Business
-                                    stakeholders and product owners to ensure
-                                    smooth implementation of the application
-                                </li>
-                                <li><span class="fa-li"><i class="far fa-circle-check"></i></span>
-                                    Set expectations needed from team members on Code quality and processes
-                                </li>
-                                <li><span class="fa-li"><i class="far fa-circle-check"></i></span>Manage azure
-                                    resources, API specification updates, UI integration etc
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-md-6 section-3-box">
-                            <h3>Senior Technical Lead</h3>
-                            <p>Kimeka - Chennai, India</p>
-                            <p><i class="far fa-calendar-days"></i> Oct 2021 - Aug 2022</p>
-                            <ul class="fa-ul">
-                                <li><span class="fa-li"><i class="far fa-circle-check"></i></span>Work directly with
-                                    clients
-                                    to establish problem specifications and
-                                    design solutions
-                                </li>
-                                <li><span class="fa-li"><i class="far fa-circle-check"></i></span>Coordinate with
-                                    Business
-                                    stakeholders and product owners to ensure
-                                    smooth implementation of the application
-                                </li>
-                                <li><span class="fa-li"><i class="far fa-circle-check"></i></span>
-                                    Trained team members on how to optimize and ensure the best code quality
-                                </li>
-                                <li><span class="fa-li"><i class="far fa-circle-check"></i></span>Participate in Scrum
-                                    calls
-                                    and be the point of contact to the client
-                                    for any questions or concerns
-                                </li>
-                            </ul>
-                        </div>
-
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6 section-3-box">
-                            <h3>Technical Lead</h3>
-                            <p> Future Focus Infotech - Chennai, India</p>
-                            <p><i class="far fa-calendar-days"></i> Aug 2019 - Oct 2021</p>
-                            <ul class="fa-ul">
-                                <li><span class="fa-li"><i class="far fa-circle-check"></i></span>
-                                    Team and task management along with Product development
-                                </li>
-                                <li><span class="fa-li"><i class="far fa-circle-check"></i></span>Ensure timely delivery
-                                    of
-                                    the project and production support
-                                </li>
-                                <li><span class="fa-li"><i class="far fa-circle-check"></i></span>
-                                    Automate backend validations and collect metrics
-                                </li>
-                                <li><span class="fa-li"><i class="far fa-circle-check"></i></span>
-                                    Develop, monitor, and enforce best practices for software development
-                                </li>
-                                <li><span class="fa-li"><i class="far fa-circle-check"></i></span>Lead a team of
-                                    developers
-                                    in an Agile/Scrum environment, facilitating daily
-                                    stand-ups, sprint planning, and retrospectives
-                                </li>
-                                <li><span class="fa-li"><i class="far fa-circle-check"></i></span>Research and improve
-                                    the
-                                    code quality in Legacy systems
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-md-6 section-3-box">
-                            <h3>Associate (Sr. Developer)</h3>
-                            <p>Cognizant - Bentonville, AR, USA</p>
-                            <p><i class="far fa-calendar-days"></i> May 2018 - Aug 2019</p>
-                            <ul class="fa-ul">
-                                <li><span class="fa-li"><i class="far fa-circle-check"></i></span>Work with Business
-                                    users
-                                    directly and understand their business problems
-                                </li>
-                                <li><span class="fa-li"><i class="far fa-circle-check"></i></span>Apply business
-                                    knowledge,
-                                    arrive at the best business solution
-                                </li>
-                                <li><span class="fa-li"><i class="far fa-circle-check"></i></span>Build production ready
-                                    and
-                                    satisfactory solutions in automation scripts
-                                </li>
-                                <li><span class="fa-li"><i class="far fa-circle-check"></i></span>Developed a new
-                                    algorithm
-                                    to improve performance
-                                </li>
-                                <li><span class="fa-li"><i class="far fa-circle-check"></i></span>Perform code review
-                                    and
-                                    provide constructive feedback
-                                </li>
-                                <li><span class="fa-li"><i class="far fa-circle-check"></i></span>Investigated and
-                                    resolved
-                                    several production issues
-                                </li>
-                            </ul>
-                        </div>
-
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6 section-3-box">
-                            <h3>Associate</h3>
-                            <p>Cognizant - Chennai, India</p>
-                            <p><i class="far fa-calendar-days"></i> Jan 2016 - Apr 2018</p>
-                            <ul class="fa-ul">
-                                <li><span class="fa-li"><i class="far fa-circle-check"></i></span>Work on project
-                                    deliverables as assigned in JIRA
-                                </li>
-                                <li><span class="fa-li"><i class="far fa-circle-check"></i></span>Coordinate with onsite
-                                    counterpart and take care of daily task planning
-                                </li>
-                                <li><span class="fa-li"><i class="far fa-circle-check"></i></span>Actively participate
-                                    in
-                                    team meetings and provide design review comments
-                                </li>
-                                <li><span class="fa-li"><i class="far fa-circle-check"></i></span>Prepare presentations
-                                    of
-                                    the new built features
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-md-6 section-3-box">
-                            <h3>Programmer Analyst</h3>
-                            <p>Cognizant - Chennai, India</p>
-                            <p><i class="far fa-calendar-days"></i> Nov 2012 - Dec 2015</p>
-                            <ul class="fa-ul">
-                                <li><span class="fa-li"><i class="far fa-circle-check"></i></span>Implemented a bash
-                                    script
-                                    to automate a recurring manual activity
-                                </li>
-                                <li><span class="fa-li"><i class="far fa-circle-check"></i></span>Migrated legacy data
-                                    migration scripts to new framework-based script calls
-                                </li>
-                                <li><span class="fa-li"><i class="far fa-circle-check"></i></span>Wrote custom code to
-                                    streamline the processes
-                                </li>
-                            </ul>
-                        </div>
+                <!-- Backend & API -->
+                <div class="col-12 col-md-6 col-lg-4 col-xl" data-aos="fade-up" data-aos-delay="200">
+                    <div class="skill-card">
+                        <div class="skill-icon"><i class="fas fa-code"></i></div>
+                        <h5 class="fw-bold">Backend & API</h5>
+                        <ul class="list-unstyled text-muted mt-3">
+                            <li>Python</li>
+                            <li>RESTful Web Services</li>
+                            <li>Microservices Architecture</li>
+                            <li>SQL / Relational DBs</li>
+                        </ul>
                     </div>
                 </div>
-            </section>
-
-            <!-- Section 4 -->
-            <section class="section-4-container section-container" id="section-awards">
-                <div class="container">
-                    <div class="row">
-                        <div class="col section-4 section-description">
-                            <h2>Awards</h2>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="mb-5">
-                            <div class="row mt-n4">
-                                                                <div class="col-sm-6 col-xl-4 mt-4">
-                                    <div class="card text-center border-0 rounded-3">
-                                        <div class="card-body">
-                                            <i class="fas fa-trophy icon-box medium rounded-3 mb-4"></i>
-                                            <h3 class="h5 mb-3">Delivery Excellence Award</h3>
-                                            <p class="mb-0">Appreciated for my efforts and dedication to project deliverables, my commitment to the client, and my ability to manage challenges in the overall project delivery setup for Q1 2025</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-xl-4 mt-4">
-                                    <div class="card text-center border-0 rounded-3">
-                                        <div class="card-body">
-                                            <i class="fas fa-trophy icon-box medium rounded-3 mb-4"></i>
-                                            <h3 class="h5 mb-3">Accountability Award</h3>
-                                            <p class="mb-0">Appreciated with 'Accountability award' for Q3 FY20
-                                                considering
-                                                my responsible team handling abilities</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-xl-4 mt-4">
-                                    <div class="card text-center border-0 rounded-3">
-                                        <div class="card-body">
-                                            <i class="fas fa-trophy icon-box medium rounded-3 mb-4"></i>
-                                            <h3 class="h5 mb-3">Mastering Emerging Tech - Conv UI</h3>
-                                            <p class="mb-0">Recognized with 'Mastering Emerging Tech – Conv UI' award
-                                                during
-                                                Cognizant Annual Awards 2018 for my contributions towards Slack Bot</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-xl-4 mt-4">
-                                    <div class="card text-center border-0 rounded-3">
-                                        <div class="card-body"><i
-                                                class="fas fa-trophy icon-box medium rounded-3 mb-4"></i>
-                                            <h3 class="h5 mb-3">Shishya Award</h3>
-                                            <p class="mb-0">Appreciated for my efforts in guiding and mentoring trainees
-                                                by
-                                                presenting 'Shishya Award'</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                <!-- Infrastructure -->
+                <div class="col-12 col-md-6 col-lg-4 col-xl" data-aos="fade-up" data-aos-delay="300">
+                    <div class="skill-card">
+                        <div class="skill-icon"><i class="fas fa-cloud"></i></div>
+                        <h5 class="fw-bold">Infrastructure</h5>
+                        <ul class="list-unstyled text-muted mt-3">
+                            <li>Microsoft Azure, AWS & GCP</li>
+                            <li>Serverless Compute</li>
+                            <li>Docker Containers</li>
+                            <li>Linux & Shell Scripting</li>
+                        </ul>
                     </div>
                 </div>
-            </section>
-
-            <!-- Section 5 -->
-            <section class="section-5-container section-container" id="section-achievements">
-                <div class="container">
-                    <div class="row">
-                        <div class="col section-5 section-description">
-                            <h2>Achievements</h2>
-                            <p>Rewarded for improving Client's core computation logic performance by 70% using code
-                                profiling tools</p>
-                            <p>Appreciated by Client for quickly implementing a solution in Azure Functions</p>
-                            <p>Developed a Shell script for automating a task which was added to Cognizant Innovation
-                                Portfolio</p>
-                            <p>Received several internal team appreciations and client mentions for distinctive efforts
-                                which had garnered me 'Cognizant Business Allowance' payout twice</p>
-                        </div>
+                <!-- Engineering Quality -->
+                <div class="col-12 col-md-6 col-lg-4 col-xl" data-aos="fade-up" data-aos-delay="400">
+                    <div class="skill-card">
+                        <div class="skill-icon"><i class="fas fa-chart-line"></i></div>
+                        <h5 class="fw-bold">Engineering Quality</h5>
+                        <ul class="list-unstyled text-muted mt-3">
+                            <li>Code Profiling</li>
+                            <li>Performance Analysis</li>
+                            <li>Load Testing</li>
+                            <li>Gap Analysis</li>
+                        </ul>
                     </div>
                 </div>
-            </section>
-
-
-            <!-- Footer -->
-            <footer class="footer-container">
-
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
-                            <h3>Vinay Kumar Challuru</h3>
-                        </div>
+                <!-- Leadership -->
+                <div class="col-12 col-md-6 col-lg-4 col-xl" data-aos="fade-up" data-aos-delay="500">
+                    <div class="skill-card">
+                        <div class="skill-icon"><i class="fas fa-users-cog"></i></div>
+                        <h5 class="fw-bold">Leadership</h5>
+                        <ul class="list-unstyled text-muted mt-3">
+                            <li>Agile / Scrum</li>
+                            <li>Team Leadership</li>
+                            <li>Client Management</li>
+                            <li>Mentoring Trainees</li>
+                        </ul>
                     </div>
-                    <div class="row">
-                        <div class="col">
-                            <ul class="social-icon-style2 ps-0">
-                                <li><a href="https://github.com/Vinaychalluru" class="rounded-3"><i
-                                            class="fab fa-github"></i></a></li>
-                                <li><a href="https://twitter.com/vinaychalluru" class="rounded-3"><i
-                                            class="fab fa-twitter"></i></a></li>
-                                <li><a href="https://www.linkedin.com/in/vinaychalluru/" class="rounded-3"><i
-                                            class="fab fa-linkedin-in"></i></a></li>
-                            </ul>
-                        </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- Experience Timeline -->
+    <section class="section-padding" id="experience">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="text-uppercase text-primary-brand fw-bold tracking-wide">Career Path</span>
+                <h2 class="display-5 font-outfit fw-bold mt-2">Work Experience</h2>
+                <div class="title-divider mx-auto my-3"></div>
+            </div>
+
+            <div class="timeline mt-5">
+                <!-- Exp 1 -->
+                <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content glass-card p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-2 flex-wrap">
+                            <h4 class="fw-bold text-dark mb-0">Solution Architect</h4>
+                            <span class="badge bg-light text-dark border"><i class="far fa-calendar-alt me-1"></i> Jul
+                                2023 - Present</span>
+                        </div>
+                        <h6 class="text-primary-brand mb-3">GyanSys - Chennai, India</h6>
+                        <ul class="text-muted custom-list fs-6 mb-0">
+                            <li>Designed and implemented a serverless architecture on Azure for a Hospitality client.
+                            </li>
+                            <li>Configured a gateway, nginx, and Gunicorn to load balance traffic across multiple
+                                servers.</li>
+                            <li>Led a team of engineers in cloud-based platform development, mentoring on latest
+                                technologies.</li>
+                            <li>Managed project delivery of critical projects and trained cross-functional teams in API
+                                development.</li>
+                        </ul>
                     </div>
                 </div>
 
-            </footer>
+                <!-- Exp 2 -->
+                <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content glass-card p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-2 flex-wrap">
+                            <h4 class="fw-bold text-dark mb-0">Python Lead Developer</h4>
+                            <span class="badge bg-light text-dark border"><i class="far fa-calendar-alt me-1"></i> Sep
+                                2022 - Jun 2023</span>
+                        </div>
+                        <h6 class="text-primary-brand mb-3">Solaris Softlabs - Chennai, India</h6>
+                        <ul class="text-muted custom-list fs-6 mb-0">
+                            <li>Designed backend API workflow for a Hospitality Client's trademark solution.</li>
+                            <li>Led the development team, managed project planning, delivery, and code quality
+                                expectations.</li>
+                            <li>Coordinated with stakeholders and managed Azure resources.</li>
+                        </ul>
+                    </div>
+                </div>
 
-        </main>
+                <!-- Exp 3 -->
+                <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content glass-card p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-2 flex-wrap">
+                            <h4 class="fw-bold text-dark mb-0">Senior Technical Lead</h4>
+                            <span class="badge bg-light text-dark border"><i class="far fa-calendar-alt me-1"></i> Oct
+                                2021 - Aug 2022</span>
+                        </div>
+                        <h6 class="text-primary-brand mb-3">Kimeka - Chennai, India</h6>
+                        <ul class="text-muted custom-list fs-6 mb-0">
+                            <li>Worked directly with clients for problem specifications and solution design.</li>
+                            <li>Trained team members on optimization and code quality.</li>
+                            <li>Point of contact in Scrum calls for client communications.</li>
+                        </ul>
+                    </div>
+                </div>
 
-        <!-- Javascript -->
-        <script src="{{ url_for('static', path='about/js/jQuery.min.js') }}"></script>
-        <script src="{{ url_for('static', path='about/js/bootstrap.bundle.min.js') }}"></script>
-        <script src="{{ url_for('static', path='about/js/profile.js') }}"></script>
+                <!-- Exp 4 -->
+                <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content glass-card p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-2 flex-wrap">
+                            <h4 class="fw-bold text-dark mb-0">Technical Lead</h4>
+                            <span class="badge bg-light text-dark border"><i class="far fa-calendar-alt me-1"></i> Aug
+                                2019 - Oct 2021</span>
+                        </div>
+                        <h6 class="text-primary-brand mb-3">Future Focus Infotech - Chennai, India</h6>
+                        <ul class="text-muted custom-list fs-6 mb-0">
+                            <li>Facilitated Agile/Scrum ceremonies while enforcing software development best practices.
+                            </li>
+                            <li>Automated backend validations and improved legacy system code quality.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Exp 5 & 6 summarized -->
+                <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content glass-card p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-2 flex-wrap">
+                            <h4 class="fw-bold text-dark mb-0">Earlier Roles (Cognizant)</h4>
+                            <span class="badge bg-light text-dark border"><i class="far fa-calendar-alt me-1"></i> Nov
+                                2012 - Aug 2019</span>
+                        </div>
+                        <h6 class="text-primary-brand mb-3">Bentonville, AR & Chennai, India</h6>
+                        <p class="text-muted mb-0">
+                            Progressed from Programmer Analyst to Associate (Sr. Developer). Built production-ready
+                            automation scripts, developed optimized algorithms, migrated legacy data, and collaborated
+                            directly with business users to resolve complex production issues.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Awards & Achievements -->
+    <section class="section-padding bg-light-modern" id="awards">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="text-uppercase text-primary-brand fw-bold tracking-wide">Recognition</span>
+                <h2 class="display-5 font-outfit fw-bold mt-2">Awards & Achievements</h2>
+                <div class="title-divider mx-auto my-3"></div>
+            </div>
+
+            <div class="row g-4 mb-5">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <div class="award-card d-flex align-items-start gap-4">
+                        <div class="award-icon"><i class="fas fa-trophy"></i></div>
+                        <div>
+                            <h5 class="fw-bold mb-2">Delivery Excellence Award</h5>
+                            <p class="text-muted mb-0 small">Appreciated for efforts, dedication to project
+                                deliverables, and managing overall challenges in Q1 2025.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="award-card d-flex align-items-start gap-4">
+                        <div class="award-icon"><i class="fas fa-trophy"></i></div>
+                        <div>
+                            <h5 class="fw-bold mb-2">Accountability Award</h5>
+                            <p class="text-muted mb-0 small">Recognized for responsible team handling abilities and
+                                commitment in Q3 FY20.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-right">
+                    <div class="award-card d-flex align-items-start gap-4">
+                        <div class="award-icon"><i class="fas fa-trophy"></i></div>
+                        <div>
+                            <h5 class="fw-bold mb-2">Mastering Emerging Tech</h5>
+                            <p class="text-muted mb-0 small">Awarded at Cognizant Annual Awards 2018 for innovations in
+                                Conversational UI & Slack Bot integration.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="award-card d-flex align-items-start gap-4">
+                        <div class="award-icon"><i class="fas fa-star"></i></div>
+                        <div>
+                            <h5 class="fw-bold mb-2">Performance & Mentorship</h5>
+                            <p class="text-muted mb-0 small">Received 'Shishya Award' for mentoring trainees.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Missing Achievements Restored -->
+            <div class="row mt-5" data-aos="fade-up">
+                <div class="col-12">
+                    <h4 class="font-outfit fw-bold mb-4"><i class="fas fa-award text-warning me-2"></i>Key Achievements
+                    </h4>
+                    <div class="glass-card p-4">
+                        <ul class="custom-list ps-0 mb-0">
+                            <li><i class="fas fa-chevron-right mt-1"></i> <span class="ms-1 text-muted">Rewarded for
+                                    improving Client's core computation logic performance by <strong>70%</strong> using
+                                    code profiling tools.</span></li>
+                            <li><i class="fas fa-chevron-right mt-1"></i> <span class="ms-1 text-muted">Appreciated by
+                                    Client for quickly implementing a robust solution in <strong>Azure
+                                        Functions</strong>.</span></li>
+                            <li><i class="fas fa-chevron-right mt-1"></i> <span class="ms-1 text-muted">Developed a
+                                    Shell script for automating a task which was added to the <strong>Cognizant
+                                        Innovation Portfolio</strong>.</span></li>
+                            <li><i class="fas fa-chevron-right mt-1"></i> <span class="ms-1 text-muted">Received several
+                                    internal team appreciations and client mentions for distinctive efforts which
+                                    garnered me the <strong>'Cognizant Business Allowance'</strong> payout twice.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-modern pb-4 text-center">
+        <div class="container">
+            <div class="d-flex justify-content-center align-items-center gap-4 mb-4">
+                <a href="https://github.com/Vinaychalluru" class="social-icon-footer"><i class="fab fa-github"></i></a>
+                <a href="https://twitter.com/vinaychalluru" class="social-icon-footer"><i
+                        class="fab fa-twitter"></i></a>
+                <a href="https://www.linkedin.com/in/vinaychalluru/" class="social-icon-footer"><i
+                        class="fab fa-linkedin-in"></i></a>
+            </div>
+            <p class="text-muted mb-0 font-inter">
+                &copy;
+                <script>document.write(new Date().getFullYear())</script> Vinay Kumar Challuru. All Rights Reserved.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Javascript -->
+    <script src="{{ url_for('static', path='about/js/jQuery.min.js') }}"></script>
+    <script src="{{ url_for('static', path='about/js/bootstrap.bundle.min.js') }}"></script>
+    <!-- AOS Animate On Scroll -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="{{ url_for('static', path='about/js/profile.js') }}"></script>
 </body>
 
 </html>
