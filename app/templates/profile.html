@@ -42,7 +42,9 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg fixed-top premium-nav">
         <div class="container">
-            <a class="navbar-brand font-outfit fw-bold text-dark" href="#">
+            <a class="navbar-brand font-outfit fw-bold text-dark d-flex align-items-center" href="#">
+                <img src="{{ url_for('static', path='about/icons/VinayChalluru.ico') }}" alt="VC" width="32" height="32"
+                    class="me-2 rounded-circle" style="box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
                 Vinay Challuru
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -67,12 +69,14 @@
 
     <!-- Hero Section -->
     <section class="hero-section d-flex align-items-center" id="about">
-        <div class="hero-bg-shapes">
-            <div class="shape shape-1"></div>
-            <div class="shape shape-2"></div>
+        <!-- Interactive Node Background -->
+        <div id="particles-js" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;">
         </div>
-        <div class="container position-relative z-1">
-            <div class="row align-items-center min-vh-100 mt-5 pt-5">
+
+        <div class="container position-relative z-1 mb-5">
+            <div class="row align-items-center min-vh-100 mt-5 pt-5 pb-5">
+
+                <!-- Left Text Column -->
                 <div class="col-lg-7" data-aos="fade-up" data-aos-duration="1000">
                     <span class="badge premium-badge mb-3">Solution Architect & Lead</span>
                     <h1 class="display-3 fw-bolder font-outfit text-dark mb-4">
@@ -97,10 +101,14 @@
                         </div>
                     </div>
                 </div>
-                <!-- Interactive Highlights -->
-                <div class="col-lg-5 mt-5 mt-lg-0" data-aos="fade-left" data-aos-duration="1200" data-aos-delay="200">
+
+                <!-- Right Visual Column -->
+                <div class="col-lg-5 mt-5 mt-lg-0 position-relative" data-aos="fade-left" data-aos-duration="1200"
+                    data-aos-delay="200">
+
+                    <!-- Quick Facts -->
                     <div class="glass-card p-4">
-                        <h4 class="font-outfit fw-bold mb-4"><i class="fas fa-bolt text-warning me-2"></i> Quick Facts
+                        <h4 class="font-outfit fw-bold mb-3"><i class="fas fa-bolt text-warning me-2"></i> Quick Facts
                         </h4>
                         <ul class="custom-list ps-0 mb-0">
                             <li><i class="fas fa-check"></i>&nbsp;<span class="ms-1"><strong>13+ years</strong> of IT
@@ -117,10 +125,12 @@
                                     <strong>VIT</strong></span></li>
                         </ul>
                     </div>
+
                 </div>
             </div>
         </div>
     </section>
+
 
     <!-- Skills/Expertise -->
     <section class="section-padding bg-light-modern" id="expertise">
@@ -412,6 +422,47 @@
     <!-- AOS Animate On Scroll -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="{{ url_for('static', path='about/js/profile.js') }}"></script>
+
+    <!-- Particles.js for interactive AI background -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script>
+        particlesJS('particles-js', {
+            "particles": {
+                "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#369188" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.4, "random": false },
+                "size": { "value": 3, "random": true },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#369188",
+                    "opacity": 0.3,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 2,
+                    "direction": "none",
+                    "random": true,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": { "enable": true, "mode": "grab" },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": { "distance": 200, "line_linked": { "opacity": 0.5 } }
+                }
+            },
+            "retina_detect": true
+        });
+    </script>
 </body>
 
 </html>
