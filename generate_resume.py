@@ -27,7 +27,7 @@ def generate_resume(output_path):
         fontSize=12,
         textColor=HexColor("#666666"),
         alignment=TA_CENTER,
-        spaceAfter=20
+        spaceAfter=15
     )
 
     header_info_style = ParagraphStyle(
@@ -43,8 +43,8 @@ def generate_resume(output_path):
         parent=styles['Heading2'],
         fontSize=14,
         textColor=HexColor("#369188"),
-        spaceBefore=15,
-        spaceAfter=5,
+        spaceBefore=12,
+        spaceAfter=4,
         textTransform='uppercase'
     )
 
@@ -53,35 +53,44 @@ def generate_resume(output_path):
         parent=styles['Normal'],
         fontSize=12,
         textColor=HexColor("#000000"),
-        spaceBefore=5
+        spaceBefore=4
     )
 
     company_style = ParagraphStyle(
         'Company',
         parent=styles['Normal'],
-        fontSize=11,
+        fontSize=10.5,
         textColor=HexColor("#444444"),
         italic=True
     )
 
     normal_style = styles['Normal']
-    normal_style.fontSize = 10
-    normal_style.leading = 12
+    normal_style.fontSize = 9.5
+    normal_style.leading = 11.5
 
     content = []
 
     # Header
     content.append(Paragraph("Vinay Kumar Challuru", title_style))
     content.append(Paragraph("Solution Architect & Lead | Python Expert | Cloud Solutions", subtitle_style))
-    content.append(Paragraph("Email: challuru.vinay@gmail.com | LinkedIn: linkedin.com/in/vinaychalluru | GitHub: github.com/Vinaychalluru", header_info_style))
-    content.append(Paragraph("Location: Chennai, India", header_info_style))
-    content.append(Spacer(1, 20))
+
+    # Clickable links in header
+    contact_info = (
+        "Mobile: <a href='tel:+919790369066'>+91-9790369066</a> | "
+        "Email: <a href='mailto:challuru.vinay@gmail.com'>challuru.vinay@gmail.com</a><br/>"
+        "LinkedIn: <a href='https://www.linkedin.com/in/vinaychalluru/'>linkedin.com/in/vinaychalluru</a> | "
+        "GitHub: <a href='https://github.com/Vinaychalluru'>github.com/Vinaychalluru</a><br/>"
+        "Website: <a href='https://vinaychalluru.azurewebsites.net/api/profile/'>vinaychalluru.me</a>"
+    )
+    content.append(Paragraph(contact_info, header_info_style))
+    content.append(Spacer(1, 15))
 
     # Professional Summary
     content.append(Paragraph("Professional Summary", section_header_style))
     summary_text = (
         "Solution Architect and Lead with over 13 years of IT industry experience. Expert in building innovative "
         "cloud-native platforms (Azure, AWS, GCP) and embracing AI evolution through agentic development. "
+        "Extensive domain knowledge in <b>Retail, Insurance, Banking, and Hospitality</b> industries. "
         "Proficient in Python, REST APIs, Microservices, and SQL. Proven track record in project management, "
         "Agile delivery, and leading cross-functional teams."
     )
@@ -98,7 +107,7 @@ def generate_resume(output_path):
     ]
     for skill in skills:
         content.append(Paragraph(f"&bull; {skill}", normal_style))
-        content.append(Spacer(1, 2))
+        content.append(Spacer(1, 1))
 
     # Work Experience
     content.append(Paragraph("Work Experience", section_header_style))
@@ -145,7 +154,9 @@ def generate_resume(output_path):
             "company": "Cognizant - Chennai, India & Bentonville, AR (Nov 2012 - Aug 2019)",
             "bullets": [
                 "Engineered production-grade automation, optimized algorithmic performance, and collaborated with business stakeholders to resolve complex production challenges.",
-                "Developed production-ready automation scripts and migrated legacy data."
+                "Led development of production-ready automation scripts and migrated legacy data migration frameworks.",
+                "Collaborated directly with business users in the US (Bentonville, AR) to resolve mission-critical production issues.",
+                "Automated recurring manual activities using Bash scripting, significantly reducing operational overhead."
             ]
         }
     ]
@@ -155,11 +166,11 @@ def generate_resume(output_path):
         content.append(Paragraph(exp["company"], company_style))
         for bullet in exp["bullets"]:
             content.append(Paragraph(f"&bull; {bullet}", normal_style))
-        content.append(Spacer(1, 5))
+        content.append(Spacer(1, 4))
 
     # Education
     content.append(Paragraph("Education", section_header_style))
-    content.append(Paragraph("<b>M.S. Software Engineering</b> - VIT University", normal_style))
+    content.append(Paragraph("<b>M.S. Software Engineering</b> - VIT University, Vellore, India", normal_style))
 
     # Key Achievements
     content.append(Paragraph("Key Achievements", section_header_style))
@@ -171,6 +182,11 @@ def generate_resume(output_path):
     ]
     for ach in achievements:
         content.append(Paragraph(f"&bull; {ach}", normal_style))
+
+    # Strengths
+    content.append(Paragraph("Strengths", section_header_style))
+    strengths = "Adaptable, Self-starter, Process oriented, Versatile, Leadership, Open minded"
+    content.append(Paragraph(strengths, normal_style))
 
     # Build PDF
     doc.build(content)
