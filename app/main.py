@@ -3,6 +3,7 @@ from fastapi.responses import HTMLResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 import logging
+from logging.handlers import MemoryHandler
 import uvicorn
 from pathlib import Path
 from fastapi import FastAPI, Request, HTTPException
@@ -20,6 +21,17 @@ from .config import (
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+# Implement MemoryHandler for buffering logs
+handler = logging.StreamHandler()
+formatter = logging.Formatter('%(levelname)s:%(name)s:%(message)s')
+handler.setFormatter(formatter)
+memory_handler = MemoryHandler(capacity=50, target=handler)
+
+# Remove existing handlers and add the memory handler to the root logger
+root_logger = logging.getLogger()
+root_logger.handlers.clear()
+root_logger.addHandler(memory_handler)
 
 # Create FastAPI app
 app = FastAPI(**APP_METADATA)
@@ -47,7 +59,7 @@ async def favicon():
         return FileResponse(str(favicon_path))
     return JSONResponse(status_code=404, content={"detail": "Not Found"})
 
-@app.get("/", response_class=HTMLResponse)
+@app.api_route("/", methods=["GET", "HEAD"], response_class=HTMLResponse)
 async def home(request: Request) -> HTMLResponse:
     """
     Render the main profile page.
