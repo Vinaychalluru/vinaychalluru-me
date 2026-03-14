@@ -19,7 +19,7 @@ from .config import (
 )
 
 # Configure logging
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.WARNING)
 logger = logging.getLogger(__name__)
 
 # Implement MemoryHandler for buffering logs
@@ -89,13 +89,11 @@ async def download_resume() -> FileResponse:
         FileResponse: The resume file
     """
     try:
-        logger.info(f"Looking for resume at: {RESUME_PATH}")
         # Check if file exists before attempting response
         if not RESUME_PATH.exists():
             logger.error(f"Resume file not found at path: {RESUME_PATH}")
             raise HTTPException(status_code=404, detail="Resume file not found.")
         
-        logger.info(f"Serving resume file from: {RESUME_PATH}")
         return FileResponse(
             str(RESUME_PATH),
             media_type="application/pdf",
@@ -106,7 +104,6 @@ async def download_resume() -> FileResponse:
         raise HTTPException(status_code=500, detail="Could not process resume download.")
 
 if __name__ == "__main__":
-    logging.info("Starting the application")
     uvicorn.run(
         "app.main:app",
         host="0.0.0.0",
