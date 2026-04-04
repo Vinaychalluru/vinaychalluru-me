@@ -67,8 +67,8 @@ a:hover {
 .btn-primary-custom:hover {
     background-color: transparent;
     color: var(--primary-color);
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(54, 145, 136, 0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 14px 28px rgba(54, 145, 136, 0.35);
 }
 
 /* Navbar */
@@ -382,8 +382,9 @@ a:hover {
 }
 
 .btn-outline-cta {
-    border: 2px solid var(--primary-color);
-    color: var(--primary-color);
+    background-color: var(--text-dark);
+    color: #ffffff;
+    border: 2px solid var(--text-dark);
     padding: 0.75rem 1.75rem;
     border-radius: 50px;
     font-weight: 500;
@@ -395,10 +396,10 @@ a:hover {
 }
 
 .btn-outline-cta:hover {
-    background-color: var(--primary-color);
-    color: #ffffff;
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(54, 145, 136, 0.2);
+    background-color: transparent;
+    color: var(--text-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 14px 28px rgba(26, 31, 36, 0.2);
 }
 
 /* Inline-style migrations */
