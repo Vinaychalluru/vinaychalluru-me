@@ -11,6 +11,10 @@ TEMPLATES_DIR = BASE_DIR / "templates"
 RESUME_FILENAME = "Vinay_13Y_Solution_Architect.pdf"
 RESUME_PATH = STATIC_DIR / "about" / "files" / RESUME_FILENAME
 
+# Favicon
+FAVICON_PATH = STATIC_DIR / "about" / "icons" / "VinayChalluru.ico"
+FAVICON_EXISTS = FAVICON_PATH.exists()
+
 # Profile data
 PROFILE_DATA = {
     "name": "Vinay Challuru",
@@ -18,12 +22,12 @@ PROFILE_DATA = {
     "bio": "Passionate about building innovative solutions and learning new technologies.",
     "email": "challuru.vinay@gmail.com",
     "github": "https://github.com/vinaychalluru",
-    "linkedin": "https://linkedin.com/in/vinaychalluru"
+    "linkedin": "https://linkedin.com/in/vinaychalluru",
 }
 
 # Application metadata
 APP_METADATA = {
     "title": "Vinay Challuru Portfolio",
     "description": "Personal portfolio website showcasing professional experience and skills",
-    "version": "1.0.0"
-} 
+    "version": "1.0.0",
+}
