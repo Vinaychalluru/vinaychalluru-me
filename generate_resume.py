@@ -89,22 +89,21 @@ def generate_resume(output_path):
     # Professional Summary
     content.append(Paragraph("Professional Summary", section_header_style))
     summary_text = (
-        "Solution Architect and Python Lead with ~14 years of experience designing cloud-native platforms on Azure, AWS, and GCP, "
-        "with deep expertise in serverless architectures, Python microservices, and REST API design. Over the past year, actively "
-        "built and shipped projects using Claude SDK, Claude Code CLI, Gemini, and Google AI Studio, including agent-based developer "
-        "tooling using MCP integrations and SKILL.md-based capability frameworks, and exploring Azure AI Foundry for enterprise Gen AI "
-        "workloads. Experienced in prompt engineering techniques (chain-of-thought, few-shot, system prompting), multi-agent orchestration, "
-        "and fan-out patterns, with a track record of reducing cloud infrastructure costs through architecture and right-sizing decisions. "
-        "Brings ~9 years of experience leading and mentoring engineering teams of 15+, including reskilling 30-40 engineers "
-        "from .NET to Python. Active in the AI practitioner community through conference and meetup participation."
+        "Solution Architect and AI Engineer with ~14 years of experience designing cloud-native platforms on Azure, AWS, and GCP. "
+        "Practices Generative AI engineering as a core discipline — building agent-based tooling with Claude SDK, Claude Code CLI, Gemini, "
+        "and Google AI Studio; designing multi-agent orchestration, fan-out patterns, and RAG pipelines; and applying prompt engineering "
+        "techniques (chain-of-thought, few-shot, system prompting) in production-facing work. Expanding into Azure AI Foundry for enterprise "
+        "Gen AI deployment. Brings a track record of reducing cloud infrastructure costs through deliberate architecture and right-sizing decisions. "
+        "~9 years leading and mentoring engineering teams of 15+, including reskilling 30-40 engineers from .NET to Python. "
+        "Active in the AI practitioner community through conference and meetup participation."
     )
     content.append(Paragraph(summary_text, normal_style))
 
     # Skills & Expertise
     content.append(Paragraph("Skills & Expertise", section_header_style))
     skills = [
-        "<b>AI &amp; Agentic Systems:</b> Claude SDK, Claude Code CLI, Gemini, Google AI Studio, Azure AI Foundry (exploratory), MCP (Model Context Protocol) integrations, SKILL.md-based capability frameworks, Prompt Engineering (chain-of-thought, few-shot, system prompting), Multi-agent orchestration, Fan-out patterns, RAG pipeline design, Semantic search, Responsible AI guardrails",
-        "<b>Backend & API:</b> Python (Django, FastAPI), RESTful Web Services, Microservices Architecture, Relational Databases (SQL)",
+        "<b>AI &amp; Agentic Systems:</b> Claude SDK, Claude Code CLI, Gemini, Google AI Studio, Azure AI Foundry, MCP (Model Context Protocol) integrations, SKILL.md-based capability frameworks, Prompt Engineering (chain-of-thought, few-shot, system prompting), Multi-agent orchestration, Fan-out patterns, RAG pipeline design, Semantic search, Responsible AI guardrails",
+        "<b>Backend & API:</b> Python (Django, FastAPI), RESTful Web Services, Microservices Architecture, Relational Databases (MySQL, SQL Server)",
         "<b>Infrastructure:</b> Microsoft Azure, AWS & GCP, Serverless Architectures, Containerization (Docker), Linux & Shell Scripting",
         "<b>Engineering Quality:</b> Code Profiling, Performance Optimization, Load Testing, Gap Analysis",
         "<b>Leadership:</b> Agile / Scrum, Team Leadership, Stakeholder Management, Technical Mentorship"
