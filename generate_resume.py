@@ -93,7 +93,9 @@ def generate_resume(output_path):
         "with deep expertise in serverless architectures, Python microservices, and REST API design. Over the past year, actively "
         "built and shipped projects using Claude SDK, Claude Code CLI, Gemini, and Google AI Studio, including agent-based developer "
         "tooling using MCP integrations and SKILL.md-based capability frameworks, and exploring Azure AI Foundry for enterprise Gen AI "
-        "workloads. Brings ~9 years of experience leading and mentoring engineering teams of 15+, including reskilling 30-40 engineers "
+        "workloads. Experienced in prompt engineering techniques (chain-of-thought, few-shot, system prompting), multi-agent orchestration, "
+        "and fan-out patterns, with a track record of reducing cloud infrastructure costs through architecture and right-sizing decisions. "
+        "Brings ~9 years of experience leading and mentoring engineering teams of 15+, including reskilling 30-40 engineers "
         "from .NET to Python. Active in the AI practitioner community through conference and meetup participation."
     )
     content.append(Paragraph(summary_text, normal_style))
@@ -101,7 +103,7 @@ def generate_resume(output_path):
     # Skills & Expertise
     content.append(Paragraph("Skills & Expertise", section_header_style))
     skills = [
-        "<b>AI &amp; Agentic Systems:</b> Claude SDK, Claude Code CLI, Gemini, Google AI Studio, Azure AI Foundry (exploratory), MCP (Model Context Protocol) integrations, SKILL.md-based capability frameworks, AI-augmented development workflows, Multi-agent system design (R&amp;D), RAG pipeline architecture (R&amp;D)",
+        "<b>AI &amp; Agentic Systems:</b> Claude SDK, Claude Code CLI, Gemini, Google AI Studio, Azure AI Foundry (exploratory), MCP (Model Context Protocol) integrations, SKILL.md-based capability frameworks, Prompt Engineering (chain-of-thought, few-shot, system prompting), Multi-agent orchestration, Fan-out patterns, RAG pipeline design, Semantic search, Responsible AI guardrails",
         "<b>Backend & API:</b> Python (Django, FastAPI), RESTful Web Services, Microservices Architecture, Relational Databases (SQL)",
         "<b>Infrastructure:</b> Microsoft Azure, AWS & GCP, Serverless Architectures, Containerization (Docker), Linux & Shell Scripting",
         "<b>Engineering Quality:</b> Code Profiling, Performance Optimization, Load Testing, Gap Analysis",
@@ -124,6 +126,7 @@ def generate_resume(output_path):
                 "Managed delivery of 3 active Python projects across Azure and AWS in parallel with production support for 2 live applications.",
                 "Architected, deployed, and managed 4 Azure Functions exposing 20+ endpoints, including a SQL Server-backed service serving 200,000+ requests per month and growing.",
                 "Developed Google Looker Studio dashboards replacing static PDF reports with live self-serve operational data, and built Azure alerting and monitoring dashboards for production visibility.",
+                "Contributed to cloud infrastructure cost reduction through architecture right-sizing and resource optimisation across Azure and AWS workloads.",
             ]
         },
         {
