@@ -1,78 +1,83 @@
-# Vinay Challuru Portfolio
+# Vinay Challuru — Portfolio Website
 
-A personal portfolio website built with FastAPI, showcasing professional experience, skills, and achievements.
+Personal portfolio website for Vinay Challuru, Solution Architect & AI Engineer. Built with FastAPI and deployed on Azure Functions.
 
-## Features
-
-- Responsive design
-- Interactive UI with smooth scrolling
-- Resume download functionality
-- Static file serving
-- Azure Functions deployment ready
+Live: [vinaychalluru.azurewebsites.net](https://vinaychalluru.azurewebsites.net)
 
 ## Tech Stack
 
-- FastAPI
-- Jinja2 Templates
-- Bootstrap
-- Font Awesome
-- Azure Functions
+- **Backend:** FastAPI (ASGI), Jinja2 templates
+- **Frontend:** Bootstrap 5, Font Awesome, AOS (Animate on Scroll)
+- **PDF generation:** ReportLab (`generate_resume.py`)
+- **Deployment:** Azure Functions (ASGI wrapper via `function_app.py`)
+- **CI/CD:** GitHub Actions
+
+## Project Structure
+
+```text
+vinaychalluru-me/
+├── app/
+│   ├── config.py            # Paths, resume filename, profile metadata
+│   ├── main.py              # FastAPI app — routes: /, /download-resume, /favicon.ico
+│   ├── templates/
+│   │   └── profile.html     # Single-page portfolio template
+│   └── staticfiles/
+│       └── about/
+│           ├── css/
+│           ├── js/
+│           ├── icons/
+│           ├── images/
+│           └── files/       # Resume PDF served at /download-resume
+├── generate_resume.py       # ReportLab PDF generator — run to rebuild the PDF
+├── function_app.py          # Azure Functions ASGI entry point
+├── host.json                # Azure Functions host config
+├── local.settings.json      # Local Azure Functions settings (not committed)
+├── requirements.in          # Direct dependencies
+└── requirements.txt         # Pinned lockfile
+```
 
 ## Development Setup
 
-1. Create a virtual environment:
+1. Create and activate a virtual environment:
+
    ```bash
-   python -m venv .venv_fastapi
+   python3 -m venv .venv_fastapi
+   source .venv_fastapi/bin/activate   # macOS/Linux
+   .\.venv_fastapi\Scripts\activate    # Windows
    ```
 
-2. Activate the virtual environment:
-   - Windows:
-     ```bash
-     .\.venv_fastapi\Scripts\activate
-     ```
-   - Unix/MacOS:
-     ```bash
-     source .venv_fastapi/bin/activate
-     ```
+2. Install dependencies:
 
-3. Install dependencies:
    ```bash
    pip install -r requirements.in
    ```
 
-4. Run the development server:
+3. Run the dev server:
+
    ```bash
-   uvicorn app.main:app --reload
+   python -m uvicorn app.main:app --reload --port 8000
    ```
 
-5. Visit [http://localhost:8000](http://localhost:8000)
+   > Use `python -m uvicorn` (not the `uvicorn` script directly) to avoid venv shebang issues.
 
-## Project Structure
+4. Visit [http://localhost:8000](http://localhost:8000)
 
+## Regenerating the Resume PDF
+
+The PDF is committed to the repo and served statically. To rebuild it after editing `generate_resume.py`:
+
+```bash
+# Install reportlab if not already present
+pip install reportlab
+
+# Regenerate
+python generate_resume.py
 ```
-vinaychalluru-me/
-├── app/
-│   ├── __init__.py
-│   ├── main.py          # FastAPI application
-│   ├── static/          # Static files (CSS, JS, images)
-│   └── templates/       # Jinja2 templates
-├── tests/              # Test files
-├── requirements.in     # Project dependencies
-└── README.md          # This file
-```
+
+Output path: `app/staticfiles/about/files/Vinay_AI_Architect_Resume.pdf`
+
+Always `git add` the PDF after regenerating before committing.
 
 ## Deployment
 
-The application is configured for deployment on Azure Functions. The deployment process is handled through GitHub Actions.
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details. 
+Deployed to Azure Functions via GitHub Actions on push to `main`. The ASGI app is wrapped in `function_app.py` using `func.AsgiFunctionApp`.
