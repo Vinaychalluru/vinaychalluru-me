@@ -8,7 +8,7 @@ Live: [vinaychalluru.azurewebsites.net](https://vinaychalluru.azurewebsites.net)
 
 - **Backend:** FastAPI (ASGI), Jinja2 templates
 - **RAG chat:** Azure AI Search · Azure OpenAI (`text-embedding-3-small`) · Claude (Anthropic)
-- **Frontend:** Bootstrap 5, Font Awesome, AOS (Animate on Scroll)
+- **Frontend:** Bootstrap 5, Font Awesome, AOS (Animate on Scroll), marked.js (markdown rendering in chat)
 - **PDF generation:** ReportLab (`generate_resume.py`)
 - **Deployment:** Azure Functions (ASGI wrapper via `function_app.py`)
 - **CI/CD:** GitHub Actions
@@ -34,7 +34,7 @@ vinaychalluru-me/
 │   ├── llm.py               # ClaudeClient (async streaming)
 │   ├── session.py           # In-memory session store (TTL-based)
 │   └── ingestion/
-│       ├── loader.py        # PDF fetch (httpx+pdfplumber) + site scraper (bs4)
+│       ├── loader.py        # PDF + HTML reads from local filesystem (pdfplumber, bs4)
 │       ├── chunker.py       # Sliding-window token chunker (cl100k_base, 512t)
 │       ├── deduplicator.py  # Cosine dedup (threshold 0.97, resume wins ties)
 │       └── pipeline.py      # run_ingest() orchestrator
@@ -112,6 +112,13 @@ func start
 
 The app will be available at **http://localhost:7071**.
 
+> **Suppressing the AzureWebJobsStorage warning:** You'll see an `Unhealthy` log every 30s because `AzureWebJobsStorage` is empty. This doesn't affect HTTP-trigger functions but is noisy. To silence it, install [Azurite](https://learn.microsoft.com/azure/storage/common/storage-use-azurite) and run it in a separate terminal before `func start`:
+> ```bash
+> npm install -g azurite
+> azurite --location /tmp/azurite
+> ```
+> Then set `"AzureWebJobsStorage": "UseDevelopmentStorage=true"` in `local.settings.json`.
+
 > **Alternative (UI only, no RAG):** If you only need to check the portfolio page and don't need the chat endpoints, uvicorn is faster:
 > ```bash
 > python -m uvicorn app.main:app --reload --port 8000
@@ -120,13 +127,14 @@ The app will be available at **http://localhost:7071**.
 
 ### 5. Search index
 
-Ingest runs **automatically on every app startup** — the app reads the resume PDF and HTML template directly from disk (no HTTP round-trip), embeds them, and uploads to Azure AI Search. You'll see a log line like:
+Ingest runs **automatically on the first HTTP request** — Azure Functions lazy-initializes the ASGI app on the first request (not when `func start` launches the host), so the FastAPI lifespan fires then. The app reads the resume PDF and HTML template directly from disk, embeds them, and uploads to Azure AI Search. You'll see log lines like:
 
 ```
-WARNING:app.main:Startup ingest complete: {'total_chunks': 87, 'resume_chunks': 42, ...}
+WARNING:rag.ingestion.pipeline:Ingest started
+WARNING:rag.ingestion.pipeline:Ingest complete: {'total_chunks': 87, 'resume_chunks': 42, ...}
 ```
 
-This takes ~5 seconds. No manual trigger needed.
+The first request will be slower by ~5s while ingest runs. Subsequent requests are normal. No manual trigger needed.
 
 **Force re-ingest** (e.g. after updating the resume PDF):
 

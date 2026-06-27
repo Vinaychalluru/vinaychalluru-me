@@ -25,6 +25,7 @@ from .config import (
 _HTML_PATH = TEMPLATES_DIR / "profile.html"
 
 logging.basicConfig(level=logging.WARNING, format="%(levelname)s:%(name)s:%(message)s")
+logging.getLogger("azure").setLevel(logging.WARNING)
 logger = logging.getLogger(__name__)
 
 MAX_MESSAGE_CHARS = 2000
@@ -50,12 +51,14 @@ async def lifespan(app: FastAPI):
         ttl_seconds=int(os.environ.get("SESSION_TTL_SECONDS", "3600"))
     )
 
-    # Auto-ingest on startup: the resume PDF and HTML template are local files,
-    # so this costs only CPU + Azure AI Search/OpenAI time (~5s in practice).
-    # No HTTP round-trip, no circular dependency, no manual trigger needed.
-    # We swallow errors so a transient Azure outage does not crash the app —
-    # the chat widget will still load; queries just return no results until the
-    # next deploy re-triggers ingest.
+    # Auto-ingest on first request: Azure Functions lazy-initializes the ASGI
+    # app on the first HTTP request, so this lifespan runs then — not when
+    # func start launches the host. The resume PDF and HTML template are read
+    # directly from disk (no HTTP round-trip, no circular dependency). The first
+    # request will be delayed by ingest time (~5s). We swallow errors so a
+    # transient Azure outage does not block the app from starting — the chat
+    # widget will still load; queries just return no results until the next
+    # cold start re-triggers ingest.
     try:
         # 60s cap: if Azure AI Search or OpenAI hangs (not errors), the lifespan
         # yield would never execute and the app would never serve requests.
@@ -68,7 +71,6 @@ async def lifespan(app: FastAPI):
             ),
             timeout=60.0,
         )
-        logger.warning("Startup ingest complete: %s", result)
     except Exception as exc:
         logger.error("Startup ingest failed (chat will have no context): %s", exc)
 
@@ -153,7 +155,7 @@ async def chat(request: Request):
     query_embedding = await asyncio.to_thread(embedder.embed_texts, [message])
     query_embedding = query_embedding[0]
 
-    top_k = 5
+    top_k = 8
     candidates = await vector_store.search(query_embedding, top_k * 3)
 
     async def generate():
@@ -173,7 +175,7 @@ async def chat(request: Request):
             candidates=candidate_pairs,
             candidate_embeddings=candidate_embeddings,
             k=top_k,
-            lambda_=0.5,
+            lambda_=0.7,
         )
 
         context = "\n\n".join(

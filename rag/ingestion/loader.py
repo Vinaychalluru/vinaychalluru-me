@@ -23,6 +23,7 @@ import pdfplumber
 from bs4 import BeautifulSoup
 
 _SECTION_SELECTORS: list[tuple[str, list[str]]] = [
+    ("navigation",  ["nav",          ".navbar",      "header"]),
     ("hero",        ["#hero",        ".hero",        "section.hero"]),
     ("about",       ["#about",       ".about",       "section#about"]),
     ("ai-practice", ["#ai-practice", ".ai-practice", "section#ai-practice"]),

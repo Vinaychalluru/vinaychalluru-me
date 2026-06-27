@@ -23,6 +23,7 @@ async def run_ingest(
     store: BaseVectorStore,
 ) -> dict:
     start = time.time()
+    logger.warning("Ingest started")
 
     logger.info("Reading resume PDF from %s", pdf_path)
     pdf_text = await fetch_pdf_text(pdf_path)
@@ -52,6 +53,8 @@ async def run_ingest(
     await store.upsert(unique_chunks, unique_embeddings)
 
     elapsed = round(time.time() - start, 2)
+    logger.warning("Ingest complete: total=%d resume=%d sections=%d elapsed=%.2fs",
+                   len(unique_chunks), len(resume_chunks), len(website_sections), elapsed)
     return {
         "total_chunks": len(unique_chunks),
         "resume_chunks": len(resume_chunks),

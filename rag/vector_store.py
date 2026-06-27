@@ -84,7 +84,7 @@ class AzureSearchStore(BaseVectorStore):
     async def search(self, query_embedding: list[float], k: int) -> list[tuple[Chunk, float, list[float]]]:
         from azure.search.documents.models import VectorizedQuery
         try:
-            results = self._search_client.search(
+            results = await self._search_client.search(
                 search_text=None,
                 vector_queries=[
                     VectorizedQuery(vector=query_embedding, k_nearest_neighbors=k, fields="embedding")
