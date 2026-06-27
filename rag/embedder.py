@@ -1,7 +1,6 @@
 from __future__ import annotations
 from abc import ABC, abstractmethod
 import os
-import numpy as np
 from openai import AzureOpenAI
 
 
@@ -10,9 +9,6 @@ class BaseEmbedder(ABC):
 
     @abstractmethod
     def embed_texts(self, texts: list[str]) -> list[list[float]]: ...
-
-    def embed_query(self, text: str) -> list[float]:
-        return self.embed_texts([text])[0]
 
 
 class AzureEmbedder(BaseEmbedder):

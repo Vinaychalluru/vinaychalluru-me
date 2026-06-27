@@ -2,8 +2,6 @@ from __future__ import annotations
 import logging
 import os
 from abc import ABC, abstractmethod
-from typing import Literal
-
 from azure.search.documents.aio import SearchClient as AsyncSearchClient
 from azure.search.documents.indexes.aio import SearchIndexClient as AsyncSearchIndexClient
 from azure.core.credentials import AzureKeyCredential
@@ -13,8 +11,6 @@ from rag.types import Chunk
 
 _logger = logging.getLogger(__name__)
 
-VectorStoreStatus = Literal["ok", "not_ingested", "unreachable"]
-
 
 class BaseVectorStore(ABC):
     @abstractmethod
@@ -22,9 +18,6 @@ class BaseVectorStore(ABC):
 
     @abstractmethod
     async def search(self, query_embedding: list[float], k: int) -> list[tuple[Chunk, float, list[float]]]: ...
-
-    @abstractmethod
-    async def health_check(self) -> VectorStoreStatus: ...
 
     @abstractmethod
     async def delete_all(self) -> None: ...
@@ -122,15 +115,6 @@ class AzureSearchStore(BaseVectorStore):
         except HttpResponseError as exc:
             _logger.error("Azure Search query failed: %s %s", exc.status_code, exc.message)
             return []
-
-    async def health_check(self) -> VectorStoreStatus:
-        try:
-            await self._index_client.get_index(self._index_name)
-            return "ok"
-        except ResourceNotFoundError:
-            return "not_ingested"
-        except Exception:
-            return "unreachable"
 
     async def delete_all(self) -> None:
         try:

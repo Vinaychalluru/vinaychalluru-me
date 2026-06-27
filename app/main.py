@@ -4,7 +4,6 @@ import logging
 import os
 import uuid
 from contextlib import asynccontextmanager
-from logging.handlers import MemoryHandler
 
 import uvicorn
 from fastapi import FastAPI, HTTPException, Request
@@ -23,16 +22,10 @@ from .config import (
     TEMPLATES_DIR,
 )
 
-logging.basicConfig(level=logging.WARNING)
+logging.basicConfig(level=logging.WARNING, format="%(levelname)s:%(name)s:%(message)s")
 logger = logging.getLogger(__name__)
 
-handler = logging.StreamHandler()
-formatter = logging.Formatter("%(levelname)s:%(name)s:%(message)s")
-handler.setFormatter(formatter)
-memory_handler = MemoryHandler(capacity=50, target=handler)
-root_logger = logging.getLogger()
-root_logger.handlers.clear()
-root_logger.addHandler(memory_handler)
+MAX_MESSAGE_CHARS = 2000
 
 SYSTEM_PROMPT_TEMPLATE = """\
 You are Vinay Kumar Challuru's professional AI assistant. Answer questions about Vinay naturally and directly, as if you know him well. Be accurate, concise, and professional. Only use the information below — if a question cannot be answered from it, say so honestly without guessing.
@@ -111,7 +104,6 @@ async def chat(request: Request):
     if not message.strip():
         raise HTTPException(status_code=400, detail="message must not be empty")
 
-    MAX_MESSAGE_CHARS = 2000
     if len(message) > MAX_MESSAGE_CHARS:
         raise HTTPException(status_code=400, detail=f"message too long (max {MAX_MESSAGE_CHARS} chars)")
 
