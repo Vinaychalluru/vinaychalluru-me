@@ -7,7 +7,8 @@ Live: [vinaychalluru.azurewebsites.net](https://vinaychalluru.azurewebsites.net)
 ## Tech Stack
 
 - **Backend:** FastAPI (ASGI), Jinja2 templates
-- **Frontend:** Bootstrap 5, Font Awesome, AOS (Animate on Scroll)
+- **RAG chat:** Azure AI Search · Azure OpenAI (`text-embedding-3-small`) · Claude (Anthropic)
+- **Frontend:** Bootstrap 5, Font Awesome, AOS (Animate on Scroll), marked.js (markdown rendering in chat)
 - **PDF generation:** ReportLab (`generate_resume.py`)
 - **Deployment:** Azure Functions (ASGI wrapper via `function_app.py`)
 - **CI/CD:** GitHub Actions
@@ -18,66 +19,163 @@ Live: [vinaychalluru.azurewebsites.net](https://vinaychalluru.azurewebsites.net)
 vinaychalluru-me/
 ├── app/
 │   ├── config.py            # Paths, resume filename, profile metadata
-│   ├── main.py              # FastAPI app — routes: /, /download-resume, /favicon.ico
+│   ├── main.py              # FastAPI app — routes: /, /download-resume, /api/chat, /api/ingest
 │   ├── templates/
-│   │   └── profile.html     # Single-page portfolio template
+│   │   └── profile.html     # Single-page portfolio (includes floating chat widget)
 │   └── staticfiles/
 │       └── about/
-│           ├── css/
-│           ├── js/
-│           ├── icons/
-│           ├── images/
 │           └── files/       # Resume PDF served at /download-resume
-├── generate_resume.py       # ReportLab PDF generator — run to rebuild the PDF
+├── rag/                     # RAG pipeline (Azure-only, no Qdrant/Ollama)
+│   ├── _math.py             # Shared cosine_sim()
+│   ├── types.py             # Chunk dataclass
+│   ├── embedder.py          # AzureEmbedder (text-embedding-3-small, 1536-dim)
+│   ├── vector_store.py      # AzureSearchStore (HNSW, retrievable embeddings)
+│   ├── mmr.py               # Maximum Marginal Relevance reranking
+│   ├── llm.py               # ClaudeClient (async streaming)
+│   ├── session.py           # In-memory session store (TTL-based)
+│   └── ingestion/
+│       ├── loader.py        # PDF + HTML reads from local filesystem (pdfplumber, bs4)
+│       ├── chunker.py       # Sliding-window token chunker (cl100k_base, 512t)
+│       ├── deduplicator.py  # Cosine dedup (threshold 0.97, resume wins ties)
+│       └── pipeline.py      # run_ingest() orchestrator
+├── generate_resume.py       # ReportLab PDF generator
 ├── function_app.py          # Azure Functions ASGI entry point
 ├── host.json                # Azure Functions host config
-├── local.settings.json      # Local Azure Functions settings (not committed)
+├── local.settings.json      # Local dev settings — fill in credentials (git-ignored)
 ├── requirements.in          # Direct dependencies
-└── requirements.txt         # Pinned lockfile
+└── requirements.txt         # Pinned lockfile (pip-compile generated)
 ```
 
-## Development Setup
+---
 
-1. Create and activate a virtual environment:
+## Local Development Setup
 
-   ```bash
-   python3 -m venv .venv_fastapi
-   source .venv_fastapi/bin/activate   # macOS/Linux
-   .\.venv_fastapi\Scripts\activate    # Windows
-   ```
+### Prerequisites
 
-2. Install dependencies:
+- Python 3.11+
+- [Azure Functions Core Tools v4](https://learn.microsoft.com/azure/azure-functions/functions-run-local) (`npm install -g azure-functions-core-tools@4`)
+- Active Azure resources: **Azure AI Search**, **Azure OpenAI** (with `text-embedding-3-small` deployed), **Anthropic API key**
 
-   ```bash
-   pip install -r requirements.in
-   ```
+### 1. Create and activate a virtual environment
 
-3. Run the dev server:
+```bash
+python3 -m venv .venv
+source .venv/bin/activate        # macOS/Linux
+.\.venv\Scripts\activate         # Windows
+```
 
-   ```bash
-   python -m uvicorn app.main:app --reload --port 8000
-   ```
+### 2. Install dependencies
 
-   > Use `python -m uvicorn` (not the `uvicorn` script directly) to avoid venv shebang issues.
+```bash
+pip install -r requirements.txt
+```
 
-4. Visit [http://localhost:8000](http://localhost:8000)
+### 3. Configure local settings
+
+`local.settings.json` is git-ignored. It ships as a placeholder template on the branch — fill in your real credentials:
+
+```json
+{
+  "IsEncrypted": false,
+  "Values": {
+    "FUNCTIONS_WORKER_RUNTIME": "python",
+    "AzureWebJobsStorage": "",
+    "ENVIRONMENT": "development",
+    "CLAUDE_API_KEY": "<your-anthropic-api-key>",
+    "CLAUDE_MODEL": "claude-sonnet-4-6",
+    "AZURE_SEARCH_ENDPOINT": "https://<name>.search.windows.net",
+    "AZURE_SEARCH_KEY": "<admin-key>",
+    "AZURE_SEARCH_INDEX": "vc-profile",
+    "AZURE_OPENAI_ENDPOINT": "https://<name>.openai.azure.com",
+    "AZURE_OPENAI_KEY": "<key>",
+    "AZURE_OPENAI_EMBEDDING_DEPLOYMENT": "text-embedding-3-small",
+    "INGEST_SECRET_KEY": "<any-random-string>",
+    "SESSION_TTL_SECONDS": "3600"
+  },
+  "ConnectionStrings": {}
+}
+```
+
+Prevent git from ever tracking this file after you populate it:
+
+```bash
+git update-index --skip-worktree local.settings.json
+```
+
+### 4. Start the app
+
+Use the Azure Functions Core Tools — this is the only way that loads `local.settings.json` and routes `/api/chat` and `/api/ingest` correctly:
+
+```bash
+func start
+```
+
+The app will be available at **http://localhost:7071**.
+
+> **Suppressing the AzureWebJobsStorage warning:** You'll see an `Unhealthy` log every 30s because `AzureWebJobsStorage` is empty. This doesn't affect HTTP-trigger functions but is noisy. To silence it, install [Azurite](https://learn.microsoft.com/azure/storage/common/storage-use-azurite) and run it in a separate terminal before `func start`:
+> ```bash
+> npm install -g azurite
+> azurite --location /tmp/azurite
+> ```
+> Then set `"AzureWebJobsStorage": "UseDevelopmentStorage=true"` in `local.settings.json`.
+
+> **Alternative (UI only, no RAG):** If you only need to check the portfolio page and don't need the chat endpoints, uvicorn is faster:
+> ```bash
+> python -m uvicorn app.main:app --reload --port 8000
+> ```
+> The chat widget will appear but `/api/chat` calls will fail because the RAG components need `local.settings.json` values injected by `func start`.
+
+### 5. Search index
+
+Ingest runs **automatically on the first HTTP request** — Azure Functions lazy-initializes the ASGI app on the first request (not when `func start` launches the host), so the FastAPI lifespan fires then. The app reads the resume PDF and HTML template directly from disk, embeds them, and uploads to Azure AI Search. You'll see log lines like:
+
+```
+WARNING:rag.ingestion.pipeline:Ingest started
+WARNING:rag.ingestion.pipeline:Ingest complete: {'total_chunks': 87, 'resume_chunks': 42, ...}
+```
+
+The first request will be slower by ~5s while ingest runs. Subsequent requests are normal. No manual trigger needed.
+
+**Force re-ingest** (e.g. after updating the resume PDF):
+
+```bash
+curl -X POST http://localhost:7071/api/ingest \
+  -H "Authorization: Bearer <your-INGEST_SECRET_KEY>"
+```
+
+### 6. Test the chat
+
+Open **http://localhost:7071** in a browser. Click the purple chat button in the bottom-right corner and ask a question, e.g. *"What cloud platforms has Vinay worked with?"*
+
+You should see tokens stream in word-by-word as the response is generated.
+
+**Manual curl test:**
+
+```bash
+curl -X POST http://localhost:7071/api/chat \
+  -H "Content-Type: application/json" \
+  -d '{"message": "What is Vinay's experience with Azure?"}'
+```
+
+Expected: an `text/event-stream` response with `data: {"token": "..."}` lines ending in `data: [DONE]`.
+
+---
 
 ## Regenerating the Resume PDF
 
-The PDF is committed to the repo and served statically. To rebuild it after editing `generate_resume.py`:
-
 ```bash
-# Install reportlab if not already present
 pip install reportlab
-
-# Regenerate
 python generate_resume.py
 ```
 
-Output path: `app/staticfiles/about/files/Vinay_AI_Architect_Resume.pdf`
+Output: `app/staticfiles/about/files/Vinay_AI_Architect_Resume.pdf` — commit the PDF after regenerating, then re-run ingest so the index reflects the new content.
 
-Always `git add` the PDF after regenerating before committing.
+---
 
 ## Deployment
 
 Deployed to Azure Functions via GitHub Actions on push to `main`. The ASGI app is wrapped in `function_app.py` using `func.AsgiFunctionApp`.
+
+**After deploying, add all `local.settings.json` keys as Application Settings** in the Azure Portal (Function App → Settings → Environment variables), except `AzureWebJobsStorage` (already set by Azure) and `ENVIRONMENT` (set to `production`).
+
+Ingest runs automatically on every cold start, so no manual trigger is needed after the first deploy. Re-deploy any time the resume PDF or template changes — ingest will rebuild the index on the next startup.
