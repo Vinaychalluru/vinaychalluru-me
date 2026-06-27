@@ -57,11 +57,16 @@ async def lifespan(app: FastAPI):
     # the chat widget will still load; queries just return no results until the
     # next deploy re-triggers ingest.
     try:
-        result = await run_ingest(
-            pdf_path=RESUME_PATH,
-            html_path=_HTML_PATH,
-            embedder=app.state.embedder,
-            store=app.state.vector_store,
+        # 60s cap: if Azure AI Search or OpenAI hangs (not errors), the lifespan
+        # yield would never execute and the app would never serve requests.
+        result = await asyncio.wait_for(
+            run_ingest(
+                pdf_path=RESUME_PATH,
+                html_path=_HTML_PATH,
+                embedder=app.state.embedder,
+                store=app.state.vector_store,
+            ),
+            timeout=60.0,
         )
         logger.warning("Startup ingest complete: %s", result)
     except Exception as exc:
@@ -139,6 +144,12 @@ async def chat(request: Request):
 
     history = await session_store.get_messages(session_id)
 
+    # Store the user turn eagerly so it survives a mid-stream client disconnect.
+    # The assistant turn is appended after streaming completes; on disconnect the
+    # generator is cancelled before reaching that point, leaving the user turn
+    # as an incomplete pair — acceptable for a portfolio chat.
+    await session_store.append_messages(session_id, [{"role": "user", "content": message}])
+
     query_embedding = await asyncio.to_thread(embedder.embed_texts, [message])
     query_embedding = query_embedding[0]
 
@@ -150,7 +161,6 @@ async def chat(request: Request):
             yield 'data: {"token": "I don\'t have enough context to answer that question."}\n\n'
             yield "data: [DONE]\n\n"
             await session_store.append_messages(session_id, [
-                {"role": "user", "content": message},
                 {"role": "assistant", "content": "I don't have enough context to answer that question."},
             ])
             return
@@ -190,11 +200,11 @@ async def chat(request: Request):
         yield "data: [DONE]\n\n"
 
         await session_store.append_messages(session_id, [
-            {"role": "user", "content": message},
             {"role": "assistant", "content": full_response},
         ])
 
     is_dev = os.environ.get("ENVIRONMENT", "production") == "development"
+    session_ttl = int(os.environ.get("SESSION_TTL_SECONDS", "3600"))
     response = StreamingResponse(
         generate(),
         media_type="text/event-stream",
@@ -205,6 +215,7 @@ async def chat(request: Request):
         httponly=True,
         samesite="lax",
         secure=not is_dev,
+        max_age=session_ttl,
     )
     return response
 

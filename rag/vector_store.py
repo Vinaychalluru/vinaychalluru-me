@@ -69,7 +69,7 @@ class AzureSearchStore(BaseVectorStore):
         await self._ensure_index()
         docs = [
             {
-                "id": str(i),
+                "id": c.chunk_id,  # stable UUID key — re-ingest is idempotent without delete_all
                 "chunk_id": c.chunk_id,
                 "text": c.text,
                 "source": c.source,
@@ -77,9 +77,9 @@ class AzureSearchStore(BaseVectorStore):
                 "token_count": c.token_count,
                 "embedding": emb,
             }
-            for i, (c, emb) in enumerate(zip(chunks, embeddings))
+            for c, emb in zip(chunks, embeddings)
         ]
-        await self._search_client.upload_documents(docs)
+        await self._search_client.merge_or_upload_documents(docs)
 
     async def search(self, query_embedding: list[float], k: int) -> list[tuple[Chunk, float, list[float]]]:
         from azure.search.documents.models import VectorizedQuery
