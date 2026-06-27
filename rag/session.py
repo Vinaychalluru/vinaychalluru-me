@@ -25,6 +25,11 @@ class SessionStore:
             self._sessions[session_id].extend(messages)
             self._timestamps[session_id] = time.time()
 
+    async def clear(self, session_id: str) -> None:
+        async with self._lock:
+            self._sessions.pop(session_id, None)
+            self._timestamps.pop(session_id, None)
+
     def _purge_expired(self) -> None:
         now = time.time()
         expired = [sid for sid, ts in self._timestamps.items() if now - ts > self._ttl]
