@@ -1,6 +1,7 @@
 import asyncio
 import logging
 import time
+from pathlib import Path
 
 from rag.types import Chunk
 from rag.ingestion.loader import fetch_pdf_text, scrape_website_sections
@@ -16,18 +17,18 @@ CHUNK_OVERLAP = 50
 
 
 async def run_ingest(
-    resume_url: str,
-    website_url: str,
+    pdf_path: Path,
+    html_path: Path,
     embedder: BaseEmbedder,
     store: BaseVectorStore,
 ) -> dict:
     start = time.time()
 
-    logger.info("Fetching resume PDF from %s", resume_url)
-    pdf_text = await fetch_pdf_text(resume_url)
+    logger.info("Reading resume PDF from %s", pdf_path)
+    pdf_text = await fetch_pdf_text(pdf_path)
 
-    logger.info("Scraping website from %s", website_url)
-    website_sections = await scrape_website_sections(website_url)
+    logger.info("Parsing website template from %s", html_path)
+    website_sections = await scrape_website_sections(html_path)
 
     all_chunks: list[Chunk] = []
 

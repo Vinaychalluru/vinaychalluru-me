@@ -22,6 +22,8 @@ from .config import (
     TEMPLATES_DIR,
 )
 
+_HTML_PATH = TEMPLATES_DIR / "profile.html"
+
 logging.basicConfig(level=logging.WARNING, format="%(levelname)s:%(name)s:%(message)s")
 logger = logging.getLogger(__name__)
 
@@ -39,6 +41,7 @@ async def lifespan(app: FastAPI):
     from rag.vector_store import make_vector_store
     from rag.llm import make_llm
     from rag.session import SessionStore
+    from rag.ingestion.pipeline import run_ingest
 
     app.state.embedder = make_embedder()
     app.state.vector_store = make_vector_store(vector_size=app.state.embedder.dimension)
@@ -46,6 +49,24 @@ async def lifespan(app: FastAPI):
     app.state.session_store = SessionStore(
         ttl_seconds=int(os.environ.get("SESSION_TTL_SECONDS", "3600"))
     )
+
+    # Auto-ingest on startup: the resume PDF and HTML template are local files,
+    # so this costs only CPU + Azure AI Search/OpenAI time (~5s in practice).
+    # No HTTP round-trip, no circular dependency, no manual trigger needed.
+    # We swallow errors so a transient Azure outage does not crash the app —
+    # the chat widget will still load; queries just return no results until the
+    # next deploy re-triggers ingest.
+    try:
+        result = await run_ingest(
+            pdf_path=RESUME_PATH,
+            html_path=_HTML_PATH,
+            embedder=app.state.embedder,
+            store=app.state.vector_store,
+        )
+        logger.warning("Startup ingest complete: %s", result)
+    except Exception as exc:
+        logger.error("Startup ingest failed (chat will have no context): %s", exc)
+
     yield
 
 
@@ -197,24 +218,11 @@ async def ingest(request: Request):
     if not secret or auth_header != f"Bearer {secret}":
         raise HTTPException(status_code=401, detail="Unauthorized")
 
-    resume_url = os.environ.get("RESUME_URL", "")
-    website_url = os.environ.get("WEBSITE_URL", "https://vinaychalluru.azurewebsites.net/")
-
-    if not resume_url:
-        raise HTTPException(status_code=500, detail="RESUME_URL not configured")
-
-    embedder = request.app.state.embedder
-    store = request.app.state.vector_store
-
-    # run_ingest blocks until PDF fetch + scrape + embed + upload complete.
-    # Azure Functions HTTP trigger has a ~230s front-door timeout.
-    # For large corpora, move ingest to a Durable Function or trigger it
-    # outside the HTTP path. For a personal resume this is safe in practice.
     result = await run_ingest(
-        resume_url=resume_url,
-        website_url=website_url,
-        embedder=embedder,
-        store=store,
+        pdf_path=RESUME_PATH,
+        html_path=_HTML_PATH,
+        embedder=request.app.state.embedder,
+        store=request.app.state.vector_store,
     )
     return JSONResponse(content=result)
 

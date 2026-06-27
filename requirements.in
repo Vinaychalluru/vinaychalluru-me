@@ -9,7 +9,6 @@ anthropic>=0.42.0
 openai>=1.59.2
 azure-search-documents>=11.6.0b9
 azure-core>=1.32.0
-httpx>=0.28.1
 pdfplumber>=0.11.4
 beautifulsoup4>=4.12.3
 tiktoken>=0.8.0

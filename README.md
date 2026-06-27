@@ -89,16 +89,12 @@ pip install -r requirements.txt
     "AZURE_OPENAI_ENDPOINT": "https://<name>.openai.azure.com",
     "AZURE_OPENAI_KEY": "<key>",
     "AZURE_OPENAI_EMBEDDING_DEPLOYMENT": "text-embedding-3-small",
-    "RESUME_URL": "http://localhost:7071/download-resume",
-    "WEBSITE_URL": "http://localhost:7071/",
     "INGEST_SECRET_KEY": "<any-random-string>",
     "SESSION_TTL_SECONDS": "3600"
   },
   "ConnectionStrings": {}
 }
 ```
-
-> **`RESUME_URL` for local testing:** point it at `http://localhost:7071/download-resume` so ingest fetches the PDF from the locally running app, not production.
 
 Prevent git from ever tracking this file after you populate it:
 
@@ -122,29 +118,22 @@ The app will be available at **http://localhost:7071**.
 > ```
 > The chat widget will appear but `/api/chat` calls will fail because the RAG components need `local.settings.json` values injected by `func start`.
 
-### 5. Populate the search index (first time only)
+### 5. Search index
 
-Once the app is running locally, trigger ingestion to build the Azure AI Search index:
+Ingest runs **automatically on every app startup** — the app reads the resume PDF and HTML template directly from disk (no HTTP round-trip), embeds them, and uploads to Azure AI Search. You'll see a log line like:
+
+```
+WARNING:app.main:Startup ingest complete: {'total_chunks': 87, 'resume_chunks': 42, ...}
+```
+
+This takes ~5 seconds. No manual trigger needed.
+
+**Force re-ingest** (e.g. after updating the resume PDF):
 
 ```bash
 curl -X POST http://localhost:7071/api/ingest \
   -H "Authorization: Bearer <your-INGEST_SECRET_KEY>"
 ```
-
-Expected response:
-
-```json
-{
-  "total_chunks": 87,
-  "resume_chunks": 42,
-  "website_sections": 7,
-  "elapsed_seconds": 18.4
-}
-```
-
-This takes 15–60 seconds (PDF fetch + scrape + batch embed + upload). It is safe to re-run — it deletes and rebuilds the index atomically.
-
-> **Already ingested?** If the `vc-profile` index was populated from a previous run of the standalone `rag_app`, skip this step.
 
 ### 6. Test the chat
 
@@ -181,11 +170,4 @@ Deployed to Azure Functions via GitHub Actions on push to `main`. The ASGI app i
 
 **After deploying, add all `local.settings.json` keys as Application Settings** in the Azure Portal (Function App → Settings → Environment variables), except `AzureWebJobsStorage` (already set by Azure) and `ENVIRONMENT` (set to `production`).
 
-Then trigger ingest against production once:
-
-```bash
-curl -X POST https://vinaychalluru.azurewebsites.net/api/ingest \
-  -H "Authorization: Bearer <INGEST_SECRET_KEY>"
-```
-
-Re-run ingest any time the resume PDF or website content changes.
+Ingest runs automatically on every cold start, so no manual trigger is needed after the first deploy. Re-deploy any time the resume PDF or template changes — ingest will rebuild the index on the next startup.
