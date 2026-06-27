@@ -222,6 +222,16 @@ async def chat(request: Request):
     return response
 
 
+@app.post("/api/chat/clear")
+async def chat_clear(request: Request):
+    session_id = request.cookies.get("session_id")
+    if session_id:
+        await request.app.state.session_store.clear(session_id)
+    response = JSONResponse(content={"cleared": True})
+    response.delete_cookie("session_id")
+    return response
+
+
 @app.post("/api/ingest")
 async def ingest(request: Request):
     from rag.ingestion.pipeline import run_ingest
