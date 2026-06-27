@@ -1,0 +1,21 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "FUNCTIONS_WORKER_RUNTIME": "python",
+    "AzureWebJobsStorage": "",
+    "ENVIRONMENT": "development",
+    "CLAUDE_API_KEY": "<your-anthropic-api-key>",
+    "CLAUDE_MODEL": "claude-sonnet-4-6",
+    "AZURE_SEARCH_ENDPOINT": "<your-azure-search-endpoint>",
+    "AZURE_SEARCH_KEY": "<your-azure-search-admin-key>",
+    "AZURE_SEARCH_INDEX": "vc-profile",
+    "AZURE_OPENAI_ENDPOINT": "<your-azure-openai-endpoint>",
+    "AZURE_OPENAI_KEY": "<your-azure-openai-key>",
+    "AZURE_OPENAI_EMBEDDING_DEPLOYMENT": "text-embedding-3-small",
+    "RESUME_URL": "https://vinaychalluru.azurewebsites.net/download-resume",
+    "WEBSITE_URL": "https://vinaychalluru.azurewebsites.net/",
+    "INGEST_SECRET_KEY": "<choose-a-random-secret-string>",
+    "SESSION_TTL_SECONDS": "3600"
+  },
+  "ConnectionStrings": {}
+}
