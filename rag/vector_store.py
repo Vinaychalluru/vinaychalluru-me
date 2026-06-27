@@ -98,8 +98,13 @@ class AzureSearchStore(BaseVectorStore):
                 ],
                 select=["id", "chunk_id", "text", "source", "section", "token_count", "embedding"],
             )
-            return [
-                (
+            triples = []
+            async for r in results:
+                emb = r.get("embedding")
+                if emb is None:
+                    _logger.warning("search result missing embedding, skipping (id=%s)", r.get("id"))
+                    continue
+                triples.append((
                     Chunk(
                         text=r["text"],
                         source=r["source"],
@@ -108,10 +113,9 @@ class AzureSearchStore(BaseVectorStore):
                         token_count=r["token_count"],
                     ),
                     r["@search.score"],
-                    list(r["embedding"]),
-                )
-                async for r in results
-            ]
+                    list(emb),
+                ))
+            return triples
         except ResourceNotFoundError:
             _logger.warning("Azure Search index '%s' not found — run POST /api/ingest first", self._index_name)
             return []
@@ -131,8 +135,10 @@ class AzureSearchStore(BaseVectorStore):
     async def delete_all(self) -> None:
         try:
             await self._index_client.delete_index(self._index_name)
-        except Exception:
-            pass
+        except ResourceNotFoundError:
+            pass  # index doesn't exist yet — first ingest
+        except Exception as exc:
+            _logger.warning("delete_all failed, proceeding with upsert: %s", exc)
 
 
 def make_vector_store(vector_size: int = 1536) -> AzureSearchStore:

@@ -758,6 +758,7 @@
               var parsed = JSON.parse(raw);
               if (parsed.token) { assistantBubble.textContent += parsed.token; scrollBottom(); }
               if (parsed.response) { assistantBubble.textContent = parsed.response; scrollBottom(); setStreaming(false); }
+              if (parsed.error) { assistantBubble.className = 'chat-bubble error'; assistantBubble.textContent = parsed.error; scrollBottom(); }
             } catch (e) {}
           });
         });

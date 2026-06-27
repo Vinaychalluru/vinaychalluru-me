@@ -111,14 +111,17 @@ async def chat(request: Request):
     if not message.strip():
         raise HTTPException(status_code=400, detail="message must not be empty")
 
+    MAX_MESSAGE_CHARS = 2000
+    if len(message) > MAX_MESSAGE_CHARS:
+        raise HTTPException(status_code=400, detail=f"message too long (max {MAX_MESSAGE_CHARS} chars)")
+
     embedder = request.app.state.embedder
     vector_store = request.app.state.vector_store
     llm = request.app.state.llm
     session_store = request.app.state.session_store
 
     session_id = request.cookies.get("session_id")
-    is_new_session = session_id is None
-    if is_new_session:
+    if session_id is None:
         session_id = str(uuid.uuid4())
 
     history = await session_store.get_messages(session_id)
@@ -178,7 +181,7 @@ async def chat(request: Request):
             {"role": "assistant", "content": full_response},
         ])
 
-    is_dev = os.environ.get("ENVIRONMENT", "development") == "development"
+    is_dev = os.environ.get("ENVIRONMENT", "production") == "development"
     response = StreamingResponse(
         generate(),
         media_type="text/event-stream",
@@ -211,6 +214,10 @@ async def ingest(request: Request):
     embedder = request.app.state.embedder
     store = request.app.state.vector_store
 
+    # run_ingest blocks until PDF fetch + scrape + embed + upload complete.
+    # Azure Functions HTTP trigger has a ~230s front-door timeout.
+    # For large corpora, move ingest to a Durable Function or trigger it
+    # outside the HTTP path. For a personal resume this is safe in practice.
     result = await run_ingest(
         resume_url=resume_url,
         website_url=website_url,
