@@ -42,7 +42,6 @@ async def lifespan(app: FastAPI):
     from rag.vector_store import make_vector_store
     from rag.llm import make_llm
     from rag.session import SessionStore
-    from rag.ingestion.pipeline import run_ingest
 
     app.state.embedder = make_embedder()
     app.state.vector_store = make_vector_store(vector_size=app.state.embedder.dimension)
@@ -51,29 +50,12 @@ async def lifespan(app: FastAPI):
         ttl_seconds=int(os.environ.get("SESSION_TTL_SECONDS", "3600"))
     )
 
-    # Auto-ingest on first request: Azure Functions lazy-initializes the ASGI
-    # app on the first HTTP request, so this lifespan runs then — not when
-    # func start launches the host. The resume PDF and HTML template are read
-    # directly from disk (no HTTP round-trip, no circular dependency). The first
-    # request will be delayed by ingest time (~5s). We swallow errors so a
-    # transient Azure outage does not block the app from starting — the chat
-    # widget will still load; queries just return no results until the next
-    # cold start re-triggers ingest.
-    try:
-        # 60s cap: if Azure AI Search or OpenAI hangs (not errors), the lifespan
-        # yield would never execute and the app would never serve requests.
-        result = await asyncio.wait_for(
-            run_ingest(
-                pdf_path=RESUME_PATH,
-                html_path=_HTML_PATH,
-                embedder=app.state.embedder,
-                store=app.state.vector_store,
-            ),
-            timeout=60.0,
-        )
-    except Exception as exc:
-        logger.error("Startup ingest failed (chat will have no context): %s", exc)
-
+    # Ingestion is NOT run here. Running it on every cold start (Azure Functions
+    # scales to zero and lazy-initializes the ASGI app on the first request after
+    # idle) meant every such visitor paid the full ~5s+ ingest cost. Instead, the
+    # CI/CD workflow (.github/workflows/main_vinaychalluru.yml) calls POST
+    # /api/ingest once, right after each deploy — see that workflow's
+    # "Trigger RAG ingest" step.
     yield
 
 

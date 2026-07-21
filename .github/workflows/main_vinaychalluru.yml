@@ -68,3 +68,27 @@ jobs:
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_D6C72544E19B43CC94C7E307E46769A0 }}
           scm-do-build-during-deployment: true
           enable-oryx-build: true
+
+      - name: Trigger RAG ingest
+        env:
+          INGEST_SECRET_KEY: ${{ secrets.INGEST_SECRET_KEY }}
+          APP_URL: ${{ steps.deploy-to-function.outputs.webapp-url }}
+        run: |
+          # Retry for a few minutes: right after deploy, the app is cold and
+          # Azure Functions can take a while to finish provisioning the new
+          # deployment package before it accepts requests.
+          for i in $(seq 1 10); do
+            status=$(curl -s -o /tmp/ingest_response.json -w "%{http_code}" \
+              -X POST "$APP_URL/api/ingest" \
+              -H "Authorization: Bearer $INGEST_SECRET_KEY")
+            if [ "$status" = "200" ]; then
+              echo "Ingest succeeded:"
+              cat /tmp/ingest_response.json
+              exit 0
+            fi
+            echo "Attempt $i: ingest returned HTTP $status, retrying in 15s..."
+            sleep 15
+          done
+          echo "Ingest failed after retries. Last response:"
+          cat /tmp/ingest_response.json
+          exit 1
