@@ -37,7 +37,7 @@ jobs:
       # Optional: Add step to run tests here
 
       - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: python-app
           path: |
@@ -49,11 +49,11 @@ jobs:
     needs: build
     environment:
       name: 'Production'
-      url: ${{ steps.deploy-to-function.outputs.webapp-url }}
+      url: ${{ steps.deploy-to-function.outputs.app-url }}
 
     steps:
       - name: Download artifact from build job
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           name: python-app
           path: .
@@ -72,7 +72,7 @@ jobs:
       - name: Trigger RAG ingest
         env:
           INGEST_SECRET_KEY: ${{ secrets.INGEST_SECRET_KEY }}
-          APP_URL: ${{ steps.deploy-to-function.outputs.webapp-url }}
+          APP_URL: ${{ steps.deploy-to-function.outputs.app-url }}
         run: |
           # Retry for a few minutes: right after deploy, the app is cold and
           # Azure Functions can take a while to finish provisioning the new
