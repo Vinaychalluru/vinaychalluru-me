@@ -127,21 +127,23 @@ The app will be available at **http://localhost:7071**.
 
 ### 5. Search index
 
-Ingest runs **automatically on the first HTTP request** — Azure Functions lazy-initializes the ASGI app on the first request (not when `func start` launches the host), so the FastAPI lifespan fires then. The app reads the resume PDF and HTML template directly from disk, embeds them, and uploads to Azure AI Search. You'll see log lines like:
+Ingest is **not** triggered automatically — it used to run in the FastAPI lifespan on every cold start, but that meant every visitor after an idle period paid the ~5s+ ingest cost. It's now a manual/CI-triggered step (see [Deployment](#deployment) for how production handles this).
+
+For local dev, trigger it once yourself after `func start` is up:
+
+```bash
+curl -X POST http://localhost:7071/api/ingest \
+  -H "Authorization: Bearer <your-INGEST_SECRET_KEY>"
+```
+
+The app reads the resume PDF and HTML template directly from disk, embeds them, and uploads to Azure AI Search. You'll see log lines like:
 
 ```
 WARNING:rag.ingestion.pipeline:Ingest started
 WARNING:rag.ingestion.pipeline:Ingest complete: {'total_chunks': 87, 'resume_chunks': 42, ...}
 ```
 
-The first request will be slower by ~5s while ingest runs. Subsequent requests are normal. No manual trigger needed.
-
-**Force re-ingest** (e.g. after updating the resume PDF):
-
-```bash
-curl -X POST http://localhost:7071/api/ingest \
-  -H "Authorization: Bearer <your-INGEST_SECRET_KEY>"
-```
+Re-run this any time you update the resume PDF or the HTML template's content.
 
 ### 6. Test the chat
 
@@ -178,4 +180,4 @@ Deployed to Azure Functions via GitHub Actions on push to `main`. The ASGI app i
 
 **After deploying, add all `local.settings.json` keys as Application Settings** in the Azure Portal (Function App → Settings → Environment variables), except `AzureWebJobsStorage` (already set by Azure) and `ENVIRONMENT` (set to `production`).
 
-Ingest runs automatically on every cold start, so no manual trigger is needed after the first deploy. Re-deploy any time the resume PDF or template changes — ingest will rebuild the index on the next startup.
+The GitHub Actions workflow (`.github/workflows/main_vinaychalluru.yml`) triggers ingest automatically once per deploy — after `deploy-to-function` succeeds, it calls `POST /api/ingest` with retries (the app may still be provisioning right after deploy). This requires an `INGEST_SECRET_KEY` GitHub Actions secret matching the value set as an Azure Function App setting. No manual step is needed for normal deploys; re-deploying after a resume PDF or template change rebuilds the index automatically as part of that same deploy.
